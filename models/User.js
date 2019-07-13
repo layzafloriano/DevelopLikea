@@ -30,10 +30,12 @@ const userSchema = new Schema({
   city: String,
   specialty: {
     type: String,
-    enum: ['FrontEnd', 'BackEnd', 'FullStack', 'Estudante', 'Outro'],
+    enum: ['FrontEnd', 'BackEnd', 'FullStack', 'Student', 'Other'],
   },
   bio: String,
   number: String,
+  imageName: String,
+  imagePath: String
 }, {
   timestamps: {
     createdAt: 'created_at',
