@@ -13,6 +13,7 @@ const postSchema = new Schema({
   authorId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
   },
   imagePath: String,
   imageName: String,

@@ -1,6 +1,6 @@
 <h1>Create Post</h1>
 <div class="container">
-  <form action="/add-post" method="post">
+  <form action="/add-post" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label for="title">Title</label>
       <input type="title" class="form-control" id="title" name="title" placeholder="Title">
@@ -9,6 +9,7 @@
       <label for="text">Text</label>
       <textarea class="form-control" id="text" name="text" rows="15"></textarea>
     </div>
+    <input type="file" class="form-control-file" id="photo" name="photo">
     <button type="submit" class="btn btn-primary">Send</button>
   </form>
 </div>
