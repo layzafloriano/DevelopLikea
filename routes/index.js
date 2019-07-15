@@ -14,11 +14,36 @@ router.get('/', (req, res) => {
   // get posts
   Post.find()
     .then((posts) => {
-      res.render('index', { posts });
+      // get openings
+      Opening.find()
+        .then((openings) => {
+          res.render('index', { openings, posts });
+        })
+        .catch(err => console.log(err));
     })
     .catch((err) => {
       console.log(err);
     });
+
+
+
+
+
+
+
+  // // get posts
+  // Post.find()
+  //   .then((posts) => {
+  //     res.render('index', { posts });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+
+  // // get openings
+  // Opening.find()
+  //   .then(openings => res.render('index', { openings }))
+  //   .catch(err => console.log(err));
 });
 
 router.get('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
