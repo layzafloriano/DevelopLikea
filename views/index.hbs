@@ -1,2 +1,26 @@
-<h1>Test page</h1>
-{{!-- {{> posts-feed}} --}}
+<div class="home-content">
+  <div class="sidebar col-3">
+    <nav>
+      <ul>
+        <li>Openings</li>
+        <li>Events</li>
+        <li>Find a mentor</li>
+        <li>Our database</li>
+      </ul>
+    </nav>
+  </div>
+  <div class="home-posts col-6">
+    <h2>Posts</h2>
+    {{#each posts}}
+    {{> postsFeed}}
+    {{/each}}
+  </div>
+  <aside class="home-side col-3">
+    <div class="home-openings">
+      <h2>Openings</h2>
+      {{#each openings}}
+      {{> openingsHome}}
+      {{/each}}
+    </div>
+  </aside>
+</div>

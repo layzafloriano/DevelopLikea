@@ -1,0 +1,8 @@
+<h4>{{post.title}}</h4>
+<img src="{{post.imagePath}}" alt="{{post.imageName}}">
+<p>{{post.text}}</p>
+
+{{#if isAuthor}}
+  <button><a href="/edit-post/{{post._id}}">Edit</a></button>
+{{/if}}
+

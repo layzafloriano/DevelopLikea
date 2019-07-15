@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const express = require('express');
 const app = express();
 const User = require('../models/User');
@@ -10,7 +11,39 @@ const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
 router.get('/', (req, res) => {
-  res.render('index');
+  // get posts
+  Post.find()
+    .then((posts) => {
+      // get openings
+      Opening.find()
+        .then((openings) => {
+          res.render('index', { openings, posts });
+        })
+        .catch(err => console.log(err));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+
+
+
+
+
+
+  // // get posts
+  // Post.find()
+  //   .then((posts) => {
+  //     res.render('index', { posts });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+
+  // // get openings
+  // Opening.find()
+  //   .then(openings => res.render('index', { openings }))
+  //   .catch(err => console.log(err));
 });
 
 router.get('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
@@ -45,7 +78,73 @@ router.post('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), uploadCloud.
       console.log(err);
     });
 });
+router.get('/post/:id', (req, res) => {
+  const postId = req.params.id;
+  let isAuthor = false;
+  Post.findById(postId)
+    .then((post) => {
+      // eslint-disable-next-line eqeqeq
+      if (req.user.id == post.authorId) isAuthor = true;
+      res.render('post', { post, isAuthor });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
+router.get('/edit-post/:id', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
+  const postId = req.params.id;
+  Post.findById(postId)
+    .then((post) => {
+      res.render('edit-post', { post });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.post('/edit-post/:id', ensureLogin.ensureLoggedIn('/auth/login'), uploadCloud.single('photo'), (req, res) => {
+  const postId = req.params.id;
+  const {
+    title, text,
+  } = req.body;
+
+  if (req.file) {
+    const imagePath = req.file.url;
+    const imageName = req.file.originalname;
+
+    Post.findByIdAndUpdate(postId, {
+      title, text, imagePath, imageName,
+    })
+      .then(() => {
+        res.redirect(`/post/${postId}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    Post.findByIdAndUpdate(postId, {
+      title, text,
+    })
+      .then(() => {
+        res.redirect(`/post/${postId}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+});
+
+router.get('/delete-post/:id', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
+  const postId = req.params.id;
+  Post.findByIdAndDelete(postId)
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 router.get('/protected', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   res.render('protected');

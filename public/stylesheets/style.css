@@ -1,0 +1,13 @@
+
+.home-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.home-posts {
+  padding: 20px;
+}
+
+.sidebar{
+  background-color: pink;
+}
