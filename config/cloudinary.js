@@ -4,18 +4,14 @@ const cloudinaryStorage = require('multer-storage-cloudinary');
 const multer = require('multer');
 
 cloudinary.config({
-  cloud_name: 'layzafloriano',
-  api_key: '836832483455965',
-  api_secret: '17qbPO6vwEjIvkLXf189CFVG-fA',
-
-  // cloud_name: 'layzafloriano',
-  // api_key: '836832483455965',
-  // api_secret: '17qbPO6vwEjIvkLXf189CFVG-fA',
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 var storage = cloudinaryStorage({
   cloudinary: cloudinary,
-  folder: 'profile', // The name of the folder in cloudinary
+  folder: 'project-02', // The name of the folder in cloudinary
   allowedFormats: ['jpg', 'png'],
   filename: function (req, file, cb) {
     cb(null, file.originalname); // The file on cloudinary would have the same name as the original file name
