@@ -84,7 +84,9 @@ router.post('/add-opening', (req, res) => {
 });
 
 router.get('/openings', (req, res) => {
-  res.render('openings');
+  Opening.find((openings) => {
+    res.render('openings', { openings });
+  })
 });
 
 router.get('/edit-opening/:openingID', (req, res) => {
