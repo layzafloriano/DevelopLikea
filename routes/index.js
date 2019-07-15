@@ -56,7 +56,7 @@ router.get('/add-opening', (req, res) => {
 })
 
 router.post('/add-opening', (req, res) => {
-  const { title, description, company, salary, requirements, type, level, city, latitude, longitude } = req.body;
+  const { title, description, company, salary, requirements, type, level, city, latitude, longitude, link } = req.body;
   const author = req.user._id;
   const location = {
     type: 'Point',
@@ -74,6 +74,7 @@ router.post('/add-opening', (req, res) => {
     type,
     level,
     city,
+    link
   });
 
   newOpening.save()
@@ -84,7 +85,53 @@ router.post('/add-opening', (req, res) => {
 });
 
 router.get('/openings', (req, res) => {
-  res.render('openings');
+  Opening.find((openings) => {
+    res.render('openings', { openings });
+  })
 });
+
+router.get('/edit-opening/:openingID', (req, res) => {
+  const openingID = req.params.openingID;
+  console.log(openingID)
+  res.render('edit-opening', { openingID });
+})
+
+router.post('/edit-opening/:openingID', (req, res) => {
+  const { title, description, company, salary, requirements, type, level, city, latitude, longitude, link } = req.body;
+  const author = req.user._id;
+  const location = {
+    type: 'Point',
+    coordinates: [longitude, latitude]
+  };
+  Opening.findByIdAndUpdate({ _id: req.params.openingID }, { title,
+    description,
+    company,
+    salary,
+    location,
+    author,
+    requirements,
+    type,
+    level,
+    city,
+    link, })
+    .then((opening) => {res.redirect('openings')})
+    .catch((err) => console.log(err))
+});
+
+router.get('/opening/:openingID', (req, res) => {
+  const openingID = req.params.openingID;
+  Opening.findById(openingID)
+    .then((opening) => {
+      res.render('opening', { opening })
+    })
+    .catch((err) => console.log(err))
+});
+
+router.post('/delete-opening/:openingID', (req, res) => {
+  const openingID = req.params.openingID;
+  Opening.findByIdAndDelete(openingID)
+    .then(() => { res.redirect('/') })
+    .catch((err) => console.log(err))
+})
 
 module.exports = router;

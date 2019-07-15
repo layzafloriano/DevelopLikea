@@ -18,6 +18,7 @@ const openingSchema = new Schema({
     enum: ['internship', 'junior', 'intermediate', 'senior'],
   },
   city: String,
+  link: String
 }, {
   timestamps: true,
 });
