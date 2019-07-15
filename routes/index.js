@@ -6,7 +6,8 @@ const Post = require('../models/Post');
 const router = express.Router();
 const ensureLogin = require('connect-ensure-login');
 const uploadCloud = require('../config/cloudinary.js');
-
+const bcrypt = require('bcrypt');
+const bcryptSalt = 10;
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -22,7 +23,7 @@ router.post('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), uploadCloud.
   let imagePath = null;
   let imageName = null;
 
-  if(req.file) {
+  if (req.file) {
     imagePath = req.file.url;
     imageName = req.file.originalname;
   }
@@ -55,7 +56,19 @@ router.get('/add-opening', (req, res) => {
 })
 
 router.post('/add-opening', (req, res) => {
-  const { title, description, company, salary, requirements, type, level, city, latitude, longitude, link } = req.body;
+  const {
+    title,
+    description,
+    company,
+    salary,
+    requirements, 
+    type,
+    level,
+    city,
+    latitude,
+    longitude,
+    link,
+  } = req.body;
   const author = req.user._id;
   const location = {
     type: 'Point',
@@ -73,36 +86,48 @@ router.post('/add-opening', (req, res) => {
     type,
     level,
     city,
-    link
+    link,
   });
 
   newOpening.save()
-    .then((opening) => res.redirect('/openings'))
+    .then(() => res.redirect('/openings'))
     .catch((err) => {
       console.log(err);
     })
 });
 
 router.get('/openings', (req, res) => {
-  Opening.find((openings) => {
-    res.render('openings', { openings });
-  })
+  Opening.find()
+    .then(openings => res.render('openings', { openings }))
+    .catch((err) => console.log(err))
 });
 
 router.get('/edit-opening/:openingID', (req, res) => {
   const openingID = req.params.openingID;
-  console.log(openingID)
   res.render('edit-opening', { openingID });
 })
 
 router.post('/edit-opening/:openingID', (req, res) => {
-  const { title, description, company, salary, requirements, type, level, city, latitude, longitude, link } = req.body;
+  const {
+    title,
+    description,
+    company,
+    salary,
+    requirements,
+    type,
+    level,
+    city,
+    latitude,
+    longitude,
+    link,
+  } = req.body;
   const author = req.user._id;
   const location = {
     type: 'Point',
     coordinates: [longitude, latitude]
   };
-  Opening.findByIdAndUpdate({ _id: req.params.openingID }, { title,
+  Opening.findByIdAndUpdate({ _id: req.params.openingID }, {
+    title,
     description,
     company,
     salary,
@@ -112,9 +137,10 @@ router.post('/edit-opening/:openingID', (req, res) => {
     type,
     level,
     city,
-    link, })
-    .then((opening) => {res.redirect('openings')})
-    .catch((err) => console.log(err))
+    link,
+})
+    .then(() => {res.redirect('openings')})
+    .catch(err => console.log(err))
 });
 
 router.get('/opening/:openingID', (req, res) => {
@@ -123,14 +149,88 @@ router.get('/opening/:openingID', (req, res) => {
     .then((opening) => {
       res.render('opening', { opening })
     })
-    .catch((err) => console.log(err))
+    .catch(err => console.log(err))
 });
 
 router.post('/delete-opening/:openingID', (req, res) => {
   const openingID = req.params.openingID;
   Opening.findByIdAndDelete(openingID)
     .then(() => { res.redirect('/') })
-    .catch((err) => console.log(err))
+    .catch(err => console.log(err))
+});
+
+router.get('/profile/:userID', (req, res) => {
+  const userID = req.params.userID;
+  User.findById(userID)
+    .then(user => res.render('profile', { user }))
+    .catch(err => console.log(err));
+});
+
+router.get('/edit-profile/:userID', (req, res) =>{
+  const userID = req.params.userID;
+  User.findById(userID)
+    .then(user => res.render('edit-profile', { userID, user }))
+    .catch(err => console.log(err))
+});
+
+router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, res) => {
+  const userID = req.params.userID;
+  const { username, password, bio, specialty, mentor, openToOpportunities, city } = req.body;
+  const salt = bcrypt.genSaltSync(bcryptSalt);
+  const hashPass = bcrypt.hashSync(password, salt);
+  let valueMentor = false;
+  let valueOpportunities = false;
+
+  if (mentor === 'on') {
+    valueMentor = true;
+  }
+
+  if (openToOpportunities === 'on') {
+    valueOpportunities = true;
+  }
+
+  if (req.file) {
+    User.findByIdAndUpdate(userID, {
+      username,
+      password: hashPass,
+      bio,
+      specialty,
+      valueMentor,
+      valueOpportunities,
+      city,
+      imagePath: req.file.originalname,
+      imageName: req.file.url,
+    })
+      .then((user) => {
+        console.log(user);
+        res.render('edit-profile', { user })
+      })
+      .catch(err => console.log(err));
+  } else {
+    User.findByIdAndUpdate(userID, {
+      username,
+      password: hashPass,
+      bio,
+      specialty,
+      valueMentor,
+      valueOpportunities,
+      city,
+    })
+      .then(user => res.render('edit-profile', { user }))
+      .catch(err => console.log(err));
+  }
+});
+
+router.get('/delete-profile/:userID', (req, res) => {
+  const userID = req.params.userID;
+  User.findByIdAndDelete(userID)
+    .then(() => res.redirect('/auth/signup'))
+    .catch(err => console.log(err));
+});
+
+router.get('/logout', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
+  req.logout();
+  res.redirect('/');
 })
 
 module.exports = router;

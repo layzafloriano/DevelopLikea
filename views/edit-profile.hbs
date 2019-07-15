@@ -1,0 +1,47 @@
+<form action="/edit-profile/{{userID}}" method="POST" enctype="multipart/form-data">
+  <img src="{{user.imagePath}}" alt="profile image">
+	<br><br>
+	<label>Update picture</label>
+	<br>
+	<input type="file" name="profile-pic">
+	<br><br>
+	
+	<label for="username">username:</label>
+	<input type="text" name="username" id="username" value="{{user.username}}">
+	<br><br>
+
+	<label for="password">password:</label>
+	<input type="password" name="password" id="password">
+	<br><br>
+
+	<label for="bio">Bio:</label>
+	<textarea name="bio" id="bio" cols="30" rows="10">{{user.bio}}</textarea>
+	<br><br>
+
+	<label for="specialty">Specialty:</label>
+	<select name="specialty" id="specialty">
+		<option value="frontend">FrontEnd</option>
+		<option value="backend">BackEnd</option>
+		<option value="fullstack">FullStack</option>
+		<option value="student">Student</option>
+		<option value="other">Other</option>
+	</select>
+	<br><br>
+
+	<input type="checkbox" name="mentor" id="mentor">
+	<label for="mentor">Mentor</label>
+	<br><br>
+
+	<input type="checkbox" name="openToOpportunities" id="openToOpportunities">
+	<label for="openToOpportunities">Open to opportunities</label>
+	<br><br>
+
+	<label for="city">City</label>
+	<input type="text" name="city" id="city" value="{{user.city}}">
+	<br><br>
+
+	<button type="submit">Update</button>
+
+</form>
+
+<a href="/delete-profile/{{user.userID}}">Delete my profile</a>
