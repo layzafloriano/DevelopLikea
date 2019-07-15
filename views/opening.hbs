@@ -1,0 +1,16 @@
+<h1>Opening Details</h1>
+<p>{{opening.title}}</p>
+<p>{{opening.description}}</p>
+<p>{{opening.company}}</p>
+<p>{{opening.salary}}</p>
+<p>{{opening.requirements}}</p>
+<p>{{opening.type}}</p>
+<p>{{opening.level}}</p>
+<p>{{opening.city}}</p>
+<a href="{{opening.link}}">Apply to this position</a>
+{{!-- make sure this user is the author --}}
+{{!-- {{#if user}} --}}
+	<form action="/delete-opening/{{opening._id}}" method="POST">
+		<button type="submit">Delete this opening</button>
+	</form>
+{{!-- {{/if}} --}}
