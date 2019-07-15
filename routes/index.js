@@ -162,7 +162,12 @@ router.post('/delete-opening/:openingID', (req, res) => {
 router.get('/profile/:userID', (req, res) => {
   const userID = req.params.userID;
   User.findById(userID)
-    .then(user => res.render('profile', { user }))
+    .then((user) => {
+      Post.find().populate(userID)
+        .then((post) => {
+          res.render('profile', { user, post });
+        });
+    })
     .catch(err => console.log(err));
 });
 
