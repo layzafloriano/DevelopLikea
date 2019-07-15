@@ -1,13 +1,28 @@
-
 .home-content {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  min-height: 1vh;
 }
+
 .home-posts {
   padding: 20px;
 }
 
-.sidebar{
+.sidebar {
   background-color: pink;
+}
+
+.sidebar a {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.sidebar ul li a:hover {
+  color: #f55190;
+}
+
+footer {
+  min-height: 150px;
+  text-align: center;
 }

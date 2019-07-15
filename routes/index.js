@@ -24,26 +24,6 @@ router.get('/', (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-
-
-
-
-
-
-
-  // // get posts
-  // Post.find()
-  //   .then((posts) => {
-  //     res.render('index', { posts });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-
-  // // get openings
-  // Opening.find()
-  //   .then(openings => res.render('index', { openings }))
-  //   .catch(err => console.log(err));
 });
 
 router.get('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
@@ -145,10 +125,6 @@ router.get('/delete-post/:id', ensureLogin.ensureLoggedIn('/auth/login'), (req, 
       console.log(err);
     });
 });
-
-router.get('/protected', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
-  res.render('protected');
-})
 
 router.get('/add-opening', (req, res) => {
   res.render('add-opening');

@@ -1,15 +1,18 @@
 <div class="home-content">
-  <div class="sidebar col-3">
+  <div class="sidebar col-2">
+    <div class="profile-data">
+      <img src="{{user.imageName}}" alt="{{user.imagePath}}">
+    </div>
     <nav>
-      <ul>
-        <li>Openings</li>
-        <li>Events</li>
-        <li>Find a mentor</li>
-        <li>Our database</li>
+      <ul class="navbar-nav">
+        <li class="nav-item"><a href="/openings" class="nav-link">Openings</a></li>
+        <li class="nav-item"><a href="/events" class="nav-link">Events</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Find a mentor</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Our database</a></li>
       </ul>
     </nav>
   </div>
-  <div class="home-posts col-6">
+  <div class="home-posts col-7">
     <h2>Posts</h2>
     {{#each posts}}
     {{> postsFeed}}
