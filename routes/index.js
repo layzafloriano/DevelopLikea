@@ -18,9 +18,14 @@ router.get('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) =>
 
 router.post('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), uploadCloud.single('photo'), (req, res) => {
   const { title, text } = req.body;
-  const imagePath = req.file.url;
-  const imageName = req.file.originalname;
   const authorId = req.user._id;
+  let imagePath = null;
+  let imageName = null;
+
+  if(req.file) {
+    imagePath = req.file.url;
+    imageName = req.file.originalname;
+  }
 
   const newPost = new Post({
     title,
@@ -29,6 +34,7 @@ router.post('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), uploadCloud.
     imagePath,
     imageName,
   });
+
   newPost.save()
     .then(() => {
       console.log(newPost);
