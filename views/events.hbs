@@ -1,0 +1,14 @@
+<h2>Upcoming Events:</h2>
+
+{{#each events}}
+    {{!-- <img src="{{this.imagePath}}" alt="event image"> --}}
+    {{this.title}}
+    <br>
+    {{this.date}}
+    <br>
+    {{this.city}}
+    <br>
+    {{this.price}}
+    <br>
+    <a href="/event/{{this._id}}">See more</a>
+{{/each}}
