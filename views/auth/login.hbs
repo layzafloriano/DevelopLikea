@@ -11,14 +11,17 @@
         <label for="password">Password:</label>
         <input type="password" name="password" class="form-control">
       </div>
-      {{#if message}}
-      <div class="error-message">{{ message }}</div>
-      {{/if}}
       <button type="submit" class="btn btn-primary">Log In</button>
       <p class="account-message mt-4">
         Don't you already have an account?
         <a href="/auth/signup">Signup</a>
       </p>
-    </form>
+  {{#if message}}
+  <div class="error-message">{{ message }}</div>
+  {{/if}}
+  <div>
+    <a href="/auth/github">Login With Github!</a>
+  </div>
+  </form>
   </div>
 </div>

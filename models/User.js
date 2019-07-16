@@ -35,12 +35,9 @@ const userSchema = new Schema({
   bio: String,
   number: String,
   imageName: String,
-  imagePath: String
+  imagePath: String,
 }, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
-  },
+  timestamps: true,
 });
 
 const User = mongoose.model('User', userSchema);

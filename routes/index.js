@@ -9,6 +9,7 @@ const uploadCloud = require('../config/cloudinary.js');
 const User = require('../models/User');
 const Opening = require('../models/Opening');
 const Post = require('../models/Post');
+const Event = require('../models/Event');
 
 const bcryptSalt = 10;
 
@@ -64,7 +65,7 @@ router.post('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), uploadCloud.
 
   newPost.save()
     .then(() => {
-      console.log(newPost);
+      // console.log(newPost);
       res.redirect('/');
     })
     .catch((err) => {
@@ -160,7 +161,7 @@ router.post('/add-opening', (req, res) => {
   const author = req.user._id;
   const location = {
     type: 'Point',
-    coordinates: [longitude, latitude]
+    coordinates: [longitude, latitude],
   };
 
   const newOpening = new Opening({
@@ -250,7 +251,13 @@ router.post('/delete-opening/:openingID', (req, res) => {
 router.get('/profile/:userID', (req, res) => {
   const userID = req.params.userID;
   User.findById(userID)
-    .then(user => res.render('profile', { user }))
+    .then((user) => {
+      Post.find()
+        .populate(userID)
+        .then((post) => {
+          res.render('profile', { user, post });
+        });
+    })
     .catch(err => console.log(err));
 });
 
@@ -263,9 +270,7 @@ router.get('/edit-profile/:userID', (req, res) => {
 
 router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, res) => {
   const userID = req.params.userID;
-  const { username, password, bio, specialty, mentor, openToOpportunities, city } = req.body;
-  const salt = bcrypt.genSaltSync(bcryptSalt);
-  const hashPass = bcrypt.hashSync(password, salt);
+  const { username, bio, specialty, mentor, openToOpportunities, city } = req.body;
   let valueMentor = false;
   let valueOpportunities = false;
 
@@ -280,14 +285,13 @@ router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, re
   if (req.file) {
     User.findByIdAndUpdate(userID, {
       username,
-      password: hashPass,
       bio,
       specialty,
       valueMentor,
       valueOpportunities,
       city,
-      imagePath: req.file.originalname,
-      imageName: req.file.url,
+      imagePath: req.file.url,
+      imageName: req.file.originalname,
     })
       .then((user) => {
         console.log(user);
@@ -297,7 +301,6 @@ router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, re
   } else {
     User.findByIdAndUpdate(userID, {
       username,
-      password: hashPass,
       bio,
       specialty,
       valueMentor,
@@ -320,5 +323,50 @@ router.get('/logout', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   req.logout();
   res.redirect('/');
 })
+
+router.get('/add-event', (req, res) => {
+  res.render('add-event');
+});
+
+router.post('/add-event', uploadCloud.single('event-pic'), (req, res) => {
+  const { title, time, city, description, price, latitude, longitude } = req.body;
+  const authorID = req.user._id;
+  // const location = {
+  //   type: 'Point',
+  //   coordinates: [longitude, latitude],
+  // };
+  let newEvent;
+  if (req.file) {
+    console.log(req.file);
+    newEvent = new Event({
+      title,
+      time,
+      city,
+      description,
+      price,
+      // location,
+      authorID,
+      imageName: req.file.originalname,
+      imagePath: req.file.url,
+    });
+  } else {
+    newEvent = new Event({
+      title,
+      time,
+      city,
+      description,
+      price,
+      // location,
+      authorID,
+    });
+  }
+  newEvent.save()
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
+});
 
 module.exports = router;
