@@ -1,36 +1,45 @@
-<form action="/add-event" method="POST" enctype="multipart/form-data">
-	<label>Title:
-		<input type="text" name="title" id="title">
-	</label>
-	<br><br>
+<div class="container my-5">
+	<h1>Add event</h1>
+	<form action="/add-event" method="POST" enctype="multipart/form-data">
 
-	<label for="description">Description:</label>
-	<input type="text" name="description" id="description">
-	<br><br>
+		<div class="form-group">
+			<label>Title</label>
+			<input type="text" name="title" id="title" class="form-control">
+		</div>
 
-	<label for="date">Date:</label>
-	<input type="datetime-local" name="time" id="time">
-	<br><br>
+		<div class="form-group">
+			<label for="description">Description</label>
+			<input type="text" name="description" id="description" class="form-control">
+		</div>
 
-	<label for="city">City:</label>
-	<input type="text" name="city" id="city">
-	<br><br>
+		<div class="form-group">
+			<label for="date">Date</label>
+			<input type="datetime-local" name="time" id="time" class="form-control">
+		</div>
 
-	<label for="price">Price:</label>
-	<input type="text" name="price" id="price">
-	<br><br>
+		<div class="form-group">
+			<label for="city">City</label>
+			<input type="text" name="city" id="city" class="form-control">
+		</div>
 
-	<label for="location">Location</label>
-  <input type="text" name="latitude" placeholder="latitude" >
-  <input type="text" name="longitude" placeholder="longitude">
-	<br><br>
-	<label for="add-picture">Add Picture
-		<br>
-	<img src="{{imagePath}}" alt="image Name">
-	<input type="file" name="event-pic" id="event-pic">
-	</label>
-	<br><br>
+		<div class="form-group">
+			<label for="price">Price</label>
+			<input type="text" name="price" id="price" class="form-control">
+		</div>
 
-	<button type="submit">Add event</button>
+		<div class="form-group">
+			<label for="location">Location</label>
+			<div class="form-location">
+				<input type="text" name="latitude" placeholder="latitude" class="form-control">
+				<input type="text" name="longitude" placeholder="longitude" class="form-control">
+			</div>
+		</div>
 
-</form>
+		<div class="form-group">
+			<label for="add-picture">Add Picture</label>
+			<input type="file" name="event-pic" id="event-pic" class="form-control-file">
+		</div>
+
+		<button type="submit" class="btn btn-primary">Add event</button>
+	</form>
+</div>

@@ -1,4 +1,5 @@
 <div class="container opening-content py-5">
+	<h1>Edit Opening</h1>
 	<form action="/edit-opening/{{openingID}}" method="post">
 		<div class="form-group">
 			<label for="title">Title</label>
@@ -48,8 +49,10 @@
 
 		<div class="form-group">
 			<label for="location">Location</label>
-			<input type="text" name="latitude" placeholder="latitude" class="form-control">
-			<input type="text" name="longitude" placeholder="longitude" class="form-control">
+			<div class="form-location">
+				<input type="text" name="latitude" placeholder="latitude" class="form-control">
+				<input type="text" name="longitude" placeholder="longitude" class="form-control">
+			</div>
 		</div>
 
 		<button type="submit" class="btn btn-primary">Register</button>

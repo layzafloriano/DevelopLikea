@@ -57,14 +57,19 @@ footer {
   max-width: 500px;
   margin: 0 auto;
   margin-top: 50px;
-  margin-bottom: 200px;
+  margin-bottom: 120px;
+}
+
+.signup-check {
+  display: flex;
+  flex-direction: row;
 }
 
 .opening-content {
   max-width: 800px;
 }
 
-.opening-location {
+.form-location {
   display: flex;
   flex-direction: row;
 }
