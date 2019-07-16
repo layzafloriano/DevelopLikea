@@ -240,14 +240,15 @@ router.get('/profile/:userID', (req, res) => {
   const userID = req.params.userID;
   User.findById(userID)
     .then((user) => {
-      Post.find()
-        .populate(userID)
+      Post.find({authorId: userID})
         .then((post) => {
           res.render('profile', { user, post });
         });
     })
     .catch(err => console.log(err));
 });
+// propriedade post com um array de object ids - 
+// a cada vez q fizer um post, da um push pro array(update)
 
 router.get('/edit-profile/:userID', (req, res) =>{
   const userID = req.params.userID;
