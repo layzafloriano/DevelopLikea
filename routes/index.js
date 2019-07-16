@@ -129,10 +129,6 @@ router.get('/delete-post/:id', ensureLogin.ensureLoggedIn('/auth/login'), (req, 
     });
 });
 
-router.get('/protected', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
-  res.render('protected');
-})
-
 router.get('/add-opening', (req, res) => {
   res.render('add-opening');
 })
@@ -263,9 +259,7 @@ router.get('/edit-profile/:userID', (req, res) =>{
 
 router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, res) => {
   const userID = req.params.userID;
-  const { username, password, bio, specialty, mentor, openToOpportunities, city } = req.body;
-  const salt = bcrypt.genSaltSync(bcryptSalt);
-  const hashPass = bcrypt.hashSync(password, salt);
+  const { username, bio, specialty, mentor, openToOpportunities, city } = req.body;
   let valueMentor = false;
   let valueOpportunities = false;
 
@@ -280,7 +274,6 @@ router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, re
   if (req.file) {
     User.findByIdAndUpdate(userID, {
       username,
-      password: hashPass,
       bio,
       specialty,
       valueMentor,
@@ -297,7 +290,6 @@ router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, re
   } else {
     User.findByIdAndUpdate(userID, {
       username,
-      password: hashPass,
       bio,
       specialty,
       valueMentor,
