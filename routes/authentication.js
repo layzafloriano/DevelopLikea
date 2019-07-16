@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport')
 const router = express.Router();
+// const OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
