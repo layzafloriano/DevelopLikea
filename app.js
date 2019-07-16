@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 require('dotenv').config();
 
 const bodyParser   = require('body-parser');
@@ -95,14 +96,28 @@ passport.use(new LocalStrategy({
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+  callbackURL: 'http://127.0.0.1:3000/auth/github/callback',
 },
-function(accessToken, refreshToken, profile, cb) {
-  User.findOrCreate({ githubId: profile.id }, function (err, user) {
-    return cb(err, user);
-  });
-}
-));
+(accessToken, refreshToken, profile, done) => {
+  console.log('nome é', profile._json.name);
+  User.findOne({ githubId: profile.id })
+    .then((user) => {
+      if (user) {
+        return done(null, user);
+      }
+      const newUser = new User({
+        githubId: profile.id,
+        name: profile._json.name,
+        imagePath: profile.photos[0].value,
+        imageName: 'Github Image',
+      });
+      newUser.save()
+        .then((user) => {
+          done(null, newUser);
+        });
+    })
+    .catch(err => console.log(err));
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
