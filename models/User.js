@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
+  githubId: String,
   name: String,
-  lastName: String,
   username: {
     type: String,
     unique: true,
-    required: true
+    // required: true
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
   status: {
     type: String,
@@ -20,11 +20,11 @@ const userSchema = new Schema({
   confirmationCode: {
     type: String,
     unique: true,
-    required: true,
+    // required: true,
   },
   email: {
     type: String,
-    required: true,
+    // required: true,
     unique: true,
   },
   mentor: Boolean,
