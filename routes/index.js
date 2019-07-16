@@ -1,23 +1,36 @@
 /* eslint-disable no-underscore-dangle */
 const express = require('express');
 const app = express();
+const flash = require('connect-flash');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const ensureLogin = require('connect-ensure-login');
+const uploadCloud = require('../config/cloudinary.js');
 const User = require('../models/User');
 const Opening = require('../models/Opening');
 const Post = require('../models/Post');
-const router = express.Router();
-const ensureLogin = require('connect-ensure-login');
-const uploadCloud = require('../config/cloudinary.js');
-const bcrypt = require('bcrypt');
+
 const bcryptSalt = 10;
 
+
 router.get('/', (req, res) => {
+  let idUser = null;
+  if (req.user) {
+    idUser = req.user.id;
+  }
   // get posts
   Post.find()
     .then((posts) => {
       // get openings
       Opening.find()
         .then((openings) => {
-          res.render('index', { openings, posts });
+          // get user details
+          User.findById(idUser)
+            .then((user) => {
+              console.log('objeto: ', user);
+              res.render('index', { openings, posts, user });
+            })
+            .catch(err => console.log(err));
         })
         .catch(err => console.log(err));
     })

@@ -22,6 +22,16 @@
   color: #f55190;
 }
 
+.sidebar-image {
+  max-width: 150px;
+  margin: 0 auto;
+}
+
+.sidebar-text {
+  text-align: center;
+  color: white;
+}
+
 footer {
   min-height: 150px;
   text-align: center;

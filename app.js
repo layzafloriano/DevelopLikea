@@ -14,7 +14,7 @@ const bcrypt       = require('bcrypt');
 const User = require('./models/User')
 const session      = require("express-session");
 const MongoStore   = require('connect-mongo')(session);
-const flash        = require("connect-flash");
+const flash        = require('connect-flash');
 const index        = require('./routes/index');
 const authRoutes = require('./routes/authentication');
 
@@ -42,6 +42,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(flash());
 
 // config hbs e favicon
 app.set('views', path.join(__dirname, 'views'));
@@ -71,23 +72,24 @@ passport.deserializeUser((id, cb) => {
     cb(null, user);
   });
 });
-  
-  
+
 passport.use(new LocalStrategy({
   passReqToCallback: true
 }, (req, username, password, next) => {
   User.findOne({ username }, (err, user) => {
     if (err) {
+      console.log('primeiro erro');
       return next(err);
     }
     if (!user) {
-      return next(null, false, { message: "Incorrect username" });
+      console.log('segundo erro');
+      return next(null, false, { message: req.flash('Incorrect username') });
     }
     if (!bcrypt.compareSync(password, user.password)) {
-      return next(null, false, { message: "Incorrect password" });
+      console.log('terceiro erro');
+      return next(null, false, { message: req.flash('Incorrect password') });
     }
     console.log('session:', user);
-      
     return next(null, user);
   });
 }));

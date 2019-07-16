@@ -73,6 +73,7 @@ router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth/login',
   passReqToCallback: true,
+  failureFlash: true,
 }));
 
 module.exports = router;

@@ -1,7 +1,14 @@
 <div class="home-content">
   <div class="sidebar col-2">
     <div class="profile-data">
-      <img src="{{user.imageName}}" alt="{{user.imagePath}}">
+      {{#if user}}
+          <img src="{{user.imageName}}" alt="{{user.imagePath}}" class="img-thumbnail sidebar-image">
+          <p class="sidebar-text">Hello, {{user.username}}</p>
+        {{else}}
+          <img src="./image/no-user-image.png" alt="No user image" class="img-thumbnail sidebar-image">
+          <p class="sidebar-text"><a href="/auth/login">Login</a></p>
+      {{/if}}
+      
     </div>
     <nav>
       <ul class="navbar-nav">
