@@ -443,4 +443,12 @@ router.get('/delete-event/:eventID', (req, res) => {
     .catch(err => console.log(err))
 });
 
+router.get('/network', (req, res) => {
+  User.find()
+    .then(users => res.render('directory', { users }))
+    .catch((err) => {
+      throw newError(err);
+    });
+})
+
 module.exports = router;
