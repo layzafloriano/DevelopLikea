@@ -12,7 +12,7 @@ router.get('/signup', (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
-  const { username, password, openToOpportunities, mentor, email } = req.body;
+  const { username, password, openToOpportunities, mentor, email, name, lastName } = req.body;
   const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let confirmationCode = '';
   for (let i = 0; i < 10; i += 1) {
@@ -46,6 +46,8 @@ router.post('/signup', (req, res, next) => {
       }
 
       const newUser = new User({
+        name,
+        lastName,
         username,
         password: hashPass,
         status: 'Pending Confirmation',
