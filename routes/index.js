@@ -65,7 +65,6 @@ router.post('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), uploadCloud.
 
   newPost.save()
     .then(() => {
-      // console.log(newPost);
       res.redirect('/');
     })
     .catch((err) => {
@@ -227,7 +226,7 @@ router.post('/edit-opening/:openingID', (req, res) => {
     level,
     city,
     link,
-})
+  })
     .then(() => {res.redirect('openings')})
     .catch(err => console.log(err))
 });
@@ -252,14 +251,15 @@ router.get('/profile/:userID', (req, res) => {
   const userID = req.params.userID;
   User.findById(userID)
     .then((user) => {
-      Post.find()
-        .populate(userID)
+      Post.find({authorId: userID})
         .then((post) => {
           res.render('profile', { user, post });
         });
     })
     .catch(err => console.log(err));
 });
+// propriedade post com um array de object ids - 
+// a cada vez q fizer um post, da um push pro array(update)
 
 router.get('/edit-profile/:userID', (req, res) => {
   const userID = req.params.userID;
@@ -331,20 +331,19 @@ router.get('/add-event', (req, res) => {
 router.post('/add-event', uploadCloud.single('event-pic'), (req, res) => {
   const { title, time, city, description, price, latitude, longitude } = req.body;
   const authorID = req.user._id;
-  // const location = {
-  //   type: 'Point',
-  //   coordinates: [longitude, latitude],
-  // };
+  const location = {
+    type: 'Point',
+    coordinates: [longitude, latitude],
+  };
   let newEvent;
   if (req.file) {
-    console.log(req.file);
     newEvent = new Event({
       title,
       time,
       city,
       description,
       price,
-      // location,
+      location,
       authorID,
       imageName: req.file.originalname,
       imagePath: req.file.url,
@@ -356,7 +355,7 @@ router.post('/add-event', uploadCloud.single('event-pic'), (req, res) => {
       city,
       description,
       price,
-      // location,
+      location,
       authorID,
     });
   }
@@ -367,6 +366,81 @@ router.post('/add-event', uploadCloud.single('event-pic'), (req, res) => {
     .catch((err) => {
       throw new Error(err);
     });
+});
+
+router.get('/event/:eventID', (req, res) => {
+  let eventID = req.params.eventID;
+  Event.findById(eventID)
+    .then((event) => {
+      res.render('event', { event });
+    })
+    .catch((err) => {
+      throw new Error(err);
+    })
+});
+
+router.get('/events', (req, res) => {
+  Event.find()
+    .then(events => res.render('events', { events }))
+    .catch((err) => {
+      throw newError(err);
+    });
+});
+
+router.get('/edit-event/:eventID', (req, res) => {
+  const eventID = req.params.eventID;
+  Event.findById(eventID)
+    .then(event => res.render('edit-event', { eventID, event }))
+    .catch((err) => {
+      throw newError(err);
+    })
+})
+
+
+router.post('/edit-event/:eventID', uploadCloud.single('event-pic'), (req, res) => {
+  const eventID = req.params.eventID;
+  const { title, time, city, description, price, latitude, longitude } = req.body;
+  const location = {
+    type: 'Point',
+    coordinates: [longitude, latitude],
+  };
+
+  if (req.file) {
+    Event.findByIdAndUpdate(eventID, {
+      title,
+      time,
+      city,
+      description,
+      price,
+      location,
+      imageName: req.file.originalname,
+      imagePath: req.file.url,
+    })
+      .then(() => res.redirect('/events'))
+      .catch((err) => {
+        throw new Error(err);
+      });
+  } else {
+    Event.findByIdAndUpdate(eventID, {
+      title,
+      time,
+      city,
+      description,
+      price,
+      location,
+    })
+      .then(() => res.redirect('/events'))
+      .catch((err) => {
+        throw new Error(err);
+      });
+  }
+});
+
+router.get('/delete-event/:eventID', (req, res) => {
+  const eventID = req.params.eventID;
+  Event.findByIdAndDelete(eventID)
+    .then(() => { res.redirect('/events') })
+    .catch(err => console.log(err))
 });
 
 module.exports = router;

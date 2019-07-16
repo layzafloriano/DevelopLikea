@@ -7,22 +7,38 @@
 <h2>Sign up</h2>
 
 <form action="/auth/signup" method="POST" id="form-container">
-	<label for="email">Email</label>
-	<input type="email" name="email" id="email">
-  <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="username">
+  <label for="name">First name:
+  <input id="name" type="text" name="name" placeholder="name">
+  </label>
   <br><br>
-  <label for="password">Password</label>
+
+  <label for="lastName">Last name:
+  <input id="lastName" type="text" name="lastName" placeholder="lastName">
+  </label>
+  <br><br>
+
+	<label for="email">Email
+	<input type="email" name="email" id="email">
+  </label>
+  <br><br>
+
+  <label for="username">Username:
+  <input id="username" type="text" name="username" placeholder="username">
+  </label>
+  <br><br>
+  <label for="password">Password:
   <input id="password" type="password" name="password" placeholder="Your password">
+  </label>
 
   {{#if message}}
     <div class="error-message">{{ message }}</div>
   {{/if}}
   <br><br>
 	<input type="checkbox" name="mentor" id="mentor">
-  <label for="mentor">Mentor</label>
-
+  <label for="mentor">Mentor
 	<input type="checkbox" name="openToOpportunities" id="openToOpportunities">
+  </label>
+
 	<label for="openToOpportunities">Open to opportunities</label>
 
   <button>Create account</button>
