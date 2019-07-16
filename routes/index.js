@@ -181,13 +181,13 @@ router.post('/add-opening', (req, res) => {
     .then(() => res.redirect('/openings'))
     .catch((err) => {
       console.log(err);
-    })
+    });
 });
 
 router.get('/openings', (req, res) => {
   Opening.find()
     .then(openings => res.render('openings', { openings }))
-    .catch((err) => console.log(err))
+    .catch(err => console.log(err));
 });
 
 router.get('/edit-opening/:openingID', (req, res) => {
@@ -254,11 +254,11 @@ router.get('/profile/:userID', (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.get('/edit-profile/:userID', (req, res) =>{
+router.get('/edit-profile/:userID', (req, res) => {
   const userID = req.params.userID;
   User.findById(userID)
     .then(user => res.render('edit-profile', { userID, user }))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
 });
 
 router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, res) => {

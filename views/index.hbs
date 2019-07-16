@@ -2,16 +2,17 @@
   <div class="sidebar col-2">
     <div class="profile-data">
       {{#if user}}
-          <img src="{{user.imageName}}" alt="{{user.imagePath}}" class="img-thumbnail sidebar-image">
+        {{#if user.imagePath}}
+          <img src="{{user.imagePath}}" alt="{{user.imageName}}" class="img-thumbnail sidebar-image">
           <p class="sidebar-text">Hello, {{user.username}}</p>
         {{else}}
-          <img src="./image/no-user-image.png" alt="No user image" class="img-thumbnail sidebar-image">
-          <p class="sidebar-text"><a href="/auth/login">Login</a></p>
+           <img src="./image/no-user-image.png" alt="{{user.imageName}}" class="img-thumbnail sidebar-image">
+          <p class="sidebar-text">Hello, {{user.username}}</p>
+        {{/if}}
       {{/if}}
-      
     </div>
     <nav>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav navbar">
         <li class="nav-item"><a href="/openings" class="nav-link">Openings</a></li>
         <li class="nav-item"><a href="/events" class="nav-link">Events</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Find a mentor</a></li>

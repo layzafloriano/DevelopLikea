@@ -78,16 +78,13 @@ passport.use(new LocalStrategy({
 }, (req, username, password, next) => {
   User.findOne({ username }, (err, user) => {
     if (err) {
-      console.log('primeiro erro');
       return next(err);
     }
     if (!user) {
-      console.log('segundo erro');
       return next(null, false, { message: req.flash('Incorrect username') });
     }
     if (!bcrypt.compareSync(password, user.password)) {
-      console.log('terceiro erro');
-      return next(null, false, { message: req.flash('Incorrect password') });
+      return next(null, false, { message: 'Incorrect password' });
     }
     console.log('session:', user);
     return next(null, user);

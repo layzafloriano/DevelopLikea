@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container my-5">
   <h1>Edit Post</h1>
 
   <form action="/edit-post/{{post._id}}" method="post" enctype="multipart/form-data">
@@ -17,7 +17,7 @@
       <label for="photo">Edit image:</label>
       <input type="file" class="form-control-file" id="photo" name="photo">
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary mt-4">Save</button>
+    <button type="button" class="btn btn-danger mt-4""><a href="/delete-post/{{post._id}}">Delete</a></button>
   </form>
-  <button type="button" class="btn btn-danger"><a href="/delete-post/{{post._id}}">Delete</a></button>
 </div>
