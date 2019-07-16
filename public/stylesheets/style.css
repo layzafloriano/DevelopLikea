@@ -22,7 +22,49 @@
   color: #f55190;
 }
 
-footer {
-  min-height: 150px;
+.sidebar-image {
+  max-width: 150px;
+  margin: 0 auto;
+}
+
+.sidebar-text {
   text-align: center;
+  color: white;
+}
+
+footer {
+  min-height: 120px;
+  text-align: center;
+  background-color: #636466fb;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.footer-icons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-icons img {
+  max-height: 30px;
+  color: white;
+  margin: 10px;
+}
+
+.card-login {
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+
+.opening-content {
+  max-width: 800px;
+}
+
+.opening-location {
+  display: flex;
+  flex-direction: row;
 }

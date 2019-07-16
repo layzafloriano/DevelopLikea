@@ -1,26 +1,37 @@
 /* eslint-disable no-underscore-dangle */
 const express = require('express');
 const app = express();
+const flash = require('connect-flash');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const ensureLogin = require('connect-ensure-login');
+const uploadCloud = require('../config/cloudinary.js');
 const User = require('../models/User');
 const Opening = require('../models/Opening');
 const Post = require('../models/Post');
 const Event = require('../models/Event');
 
-const router = express.Router();
-const ensureLogin = require('connect-ensure-login');
-const uploadCloud = require('../config/cloudinary.js');
-const bcrypt = require('bcrypt');
-
 const bcryptSalt = 10;
 
+
 router.get('/', (req, res) => {
+  let idUser = null;
+  if (req.user) {
+    idUser = req.user.id;
+  }
   // get posts
   Post.find()
     .then((posts) => {
       // get openings
       Opening.find()
         .then((openings) => {
-          res.render('index', { openings, posts });
+          // get user details
+          User.findById(idUser)
+            .then((user) => {
+              console.log('objeto: ', user);
+              res.render('index', { openings, posts, user });
+            })
+            .catch(err => console.log(err));
         })
         .catch(err => console.log(err));
     })
@@ -170,13 +181,13 @@ router.post('/add-opening', (req, res) => {
     .then(() => res.redirect('/openings'))
     .catch((err) => {
       console.log(err);
-    })
+    });
 });
 
 router.get('/openings', (req, res) => {
   Opening.find()
     .then(openings => res.render('openings', { openings }))
-    .catch((err) => console.log(err))
+    .catch(err => console.log(err));
 });
 
 router.get('/edit-opening/:openingID', (req, res) => {
@@ -250,11 +261,11 @@ router.get('/profile/:userID', (req, res) => {
 // propriedade post com um array de object ids - 
 // a cada vez q fizer um post, da um push pro array(update)
 
-router.get('/edit-profile/:userID', (req, res) =>{
+router.get('/edit-profile/:userID', (req, res) => {
   const userID = req.params.userID;
   User.findById(userID)
     .then(user => res.render('edit-profile', { userID, user }))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
 });
 
 router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, res) => {
