@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport')
 const router = express.Router();
+// const OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
@@ -74,5 +75,15 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/auth/login',
   passReqToCallback: true,
 }));
+
+router.get('/github',
+  passport.authenticate('github'));
+
+router.get('/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 module.exports = router;
