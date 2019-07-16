@@ -21,14 +21,14 @@ router.get('/', (req, res) => {
   }
   // get posts
   Post.find()
-    .then((posts) => {
+    .then((post) => {
+      const posts = post.reverse();
       // get openings
       Opening.find()
         .then((openings) => {
           // get user details
           User.findById(idUser)
             .then((user) => {
-              console.log('objeto: ', user);
               res.render('index', { openings, posts, user });
             })
             .catch(err => console.log(err));
