@@ -59,3 +59,12 @@ footer {
   margin-top: 50px;
   margin-bottom: 200px;
 }
+
+.opening-content {
+  max-width: 800px;
+}
+
+.opening-location {
+  display: flex;
+  flex-direction: row;
+}
