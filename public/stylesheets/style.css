@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=DM+Serif+Text&display=swap');
+
+* {
+  font-family: 'DM Serif Text', serif;
+}
+
 .home-content {
   display: flex;
   flex-direction: row;
