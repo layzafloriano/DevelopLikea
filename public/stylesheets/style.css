@@ -1,22 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css?family=DM+Sans&display=swap');
+
+body {
+  background-color: #f9f9fa;
+  font-family: 'Playfair Display', serif;
+}
+
 .home-content {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
   min-height: 1vh;
 }
 
 .home-posts {
-  padding: 20px;
+  padding: 10px;
+  max-width: 550px;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .sidebar {
-  background-color: pink;
+  background-color: #FFF;
+  font-size: 15px;
+  max-width: 180px;
 }
 
 .sidebar a {
-  color: #ffffff;
+  color: #000;
   font-weight: bold;
 }
+
+.sidebar ul li {
+  list-style-type: none;
+  position: relative;
+  left: -30px;
+}
+
 
 .sidebar ul li a:hover {
   color: #f55190;
@@ -29,7 +50,15 @@
 
 .sidebar-text {
   text-align: center;
-  color: white;
+  color: #000;
+}
+
+.sidebar-card {
+  height: 100vh;
+}
+
+.home-openings {
+  max-width: 222px;
 }
 
 footer {
@@ -72,4 +101,28 @@ footer {
 .form-location {
   display: flex;
   flex-direction: row;
+}
+
+.nav-color {
+  background: #FFAB90;
+  color: #FFFFFF;
+  /*FF928F*/
+}
+
+.nav-color a{
+  color: #FFFFFF;
+}
+
+
+.nav-img-logo {
+  max-height: 30px;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#nav-index{
+  max-height: 48px;
 }
