@@ -9,6 +9,10 @@ const openingSchema = new Schema({
   requirements: String,
   author: [{ type: Schema.Types.ObjectId, ref: 'Author' }],
   location: { type: { type: String }, coordinates: [Number] },
+  specialty: {
+    type: String,
+    enum: ['FrontEnd', 'BackEnd', 'FullStack']
+  },
   type: {
     type: String,
     enum: ['CLT', 'PJ'],

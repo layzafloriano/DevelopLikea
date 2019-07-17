@@ -153,6 +153,7 @@ router.post('/add-opening', (req, res) => {
     type,
     level,
     city,
+    specialty,
     latitude,
     longitude,
     link,
@@ -171,6 +172,7 @@ router.post('/add-opening', (req, res) => {
     location,
     author,
     requirements,
+    specialty,
     type,
     level,
     city,
@@ -209,6 +211,7 @@ router.post('/edit-opening/:openingID', (req, res) => {
     salary,
     requirements,
     type,
+    specialty,
     level,
     city,
     latitude,
@@ -227,6 +230,7 @@ router.post('/edit-opening/:openingID', (req, res) => {
     company,
     salary,
     location,
+    specialty,
     author,
     requirements,
     type,
@@ -265,8 +269,6 @@ router.get('/profile/:userID', (req, res) => {
     })
     .catch(err => console.log(err));
 });
-// propriedade post com um array de object ids - 
-// a cada vez q fizer um post, da um push pro array(update)
 
 router.get('/edit-profile/:userID', (req, res) => {
   const userID = req.params.userID;

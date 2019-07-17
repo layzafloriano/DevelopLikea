@@ -1,11 +1,20 @@
-<h1>Openings</h1>
-{{#each openings}}
-	<p>{{this.title}}</p>
-	<p>{{this.description}}</p>
-	<p>{{this.company}}</p>
-	<p>{{this.salary}}</p>
-	<p>{{this.requirements}}</p>
-	<p>{{this.type}}</p>
-	<p>{{this.level}}</p>
-	<p>{{this.city}}</p>
-{{/each}}
+<div class="container d-flex">
+  <nav class="sidebar-openings">
+    {{> sidebar}}
+  </nav>
+	<div class="col-8 card-openings">
+		{{#each openings}}
+		<div class="card mb-3">	
+			<div class="card-body">
+				<h2>{{title}}</h2>
+				<p>Company: {{company}}</p>
+				<p>Specialty: {{specialty}}</p>
+				<p>Level: {{level}}</p>
+				<p>City: {{city}}</p>
+				<p><a href="/opening/{{_id}}">Find out more</a></p>
+				<hr>
+			</div>
+		</div>
+		{{/each}}
+	</div>
+</div>
