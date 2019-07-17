@@ -1,6 +1,8 @@
-<h4>{{this.title}}</h4>
-<img src="{{this.imagePath}}" alt="{{this.imageName}}" class="img-fluid">
-<p>{{this.text}}</p>
-
-
-<button><a href="/post/{{this._id}}">See more...</a></button>
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="">
+      <h3><a href="/post/{{this._id}}">{{this.title}}</a></h3>
+      <a href="/post/{{this._id}}"><img src="{{this.imagePath}}" alt="{{this.imageName}}" class="img-fluid"></a>
+    </div>
+  </div>
+</div>
