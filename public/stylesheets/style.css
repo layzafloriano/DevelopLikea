@@ -143,11 +143,11 @@ footer {
 
 .post {
   max-width: 54vw;
-  margin-top: 20px; 
+  margin-top: 10px; 
 }
 
 .post h1 {
-  padding-bottom: 10px;
+  padding-bottom: 14px;
 }
 
 .post img {
@@ -158,7 +158,7 @@ footer {
 }
 
 .post-card {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .sidebar-openings {
@@ -168,3 +168,31 @@ footer {
 .card-openings {
   margin-top: 20px;
 }
+
+.sidebar-post {
+  margin-top: 30px;
+}
+
+.networking {
+  max-width: 80px;
+}
+
+.network {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  /* justify-content: flex-start; */
+}
+
+.event-size {
+  max-width: 775px;
+  margin: 0 auto;
+}
+
+.image-events {
+  max-height: 300px;
+}
+
+/* p {
+  margin: 2;
+} */
