@@ -99,7 +99,6 @@ passport.use(new GitHubStrategy({
   callbackURL: 'http://127.0.0.1:3000/auth/github/callback',
 },
 (accessToken, refreshToken, profile, done) => {
-  console.log('nome é', profile._json.name);
   User.findOne({ githubId: profile.id })
     .then((user) => {
       if (user) {
