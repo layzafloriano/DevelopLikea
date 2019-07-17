@@ -6,25 +6,34 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .home-content {
   margin-top: 20px;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: space-between;
   min-height: 1vh;
 }
 
 .home-posts {
   padding: 10px;
-  max-width: 550px;
+  max-width: 45vw;
   font-family: 'DM Sans', sans-serif;
 }
+.home-posts a {
+  color: #000;
+  font-family: 'Playfair Display', serif;
+}
+
 
 .sidebar {
   background-color: #FFF;
   font-size: 15px;
-  max-width: 180px;
+  max-width: 14vw;
 }
 
 .sidebar a {
@@ -58,7 +67,7 @@ body {
 }
 
 .home-openings {
-  max-width: 222px;
+  max-width: 17vw;;
 }
 
 footer {
