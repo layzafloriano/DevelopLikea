@@ -1,8 +1,16 @@
-<h4>{{post.title}}</h4>
-<img src="{{post.imagePath}}" alt="{{post.imageName}}">
-<p>{{post.text}}</p>
+<div class="container d-flex">
+  <nav class="sidebar-post">
+    {{> sidebar}}
+  </nav>
+  <div class="card post-card col-8">
+    <div class="card-body post">
+        <h1>{{post.title}}</h1>
+        <img src="{{post.imagePath}}" alt="{{post.imageName}}">
+        <p>{{{post.text}}}</p>
 
-{{#if isAuthor}}
-  <button><a href="/edit-post/{{post._id}}">Edit</a></button>
-{{/if}}
-
+        {{#if isAuthor}}
+          <button><a href="/edit-post/{{post._id}}">Edit</a></button>
+        {{/if}}
+    </div>
+  </div>
+</div>
