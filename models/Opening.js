@@ -11,14 +11,14 @@ const openingSchema = new Schema({
   location: { type: { type: String }, coordinates: [Number] },
   type: {
     type: String,
-    enum: ['CLT', 'PJ']
+    enum: ['CLT', 'PJ'],
   },
   level: {
     type: String,
     enum: ['internship', 'junior', 'intermediate', 'senior'],
   },
   city: String,
-  link: String
+  link: String,
 }, {
   timestamps: true,
 });
