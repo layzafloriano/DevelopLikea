@@ -1,28 +1,32 @@
-<div class="home-content">
-
-  <div class="sidebar col-2">
-    <div class="profile-data">
-      {{#if user}}
-        {{#if user.imagePath}}
+<div class="home-content container">
+  <div class="card mr-3 sidebar-card">
+    <div class="card-body">
+      <div class="sidebar col-2">
+        <div class="profile-data">
+          {{#if user}}
+          {{#if user.imagePath}}
           <img src="{{user.imagePath}}" alt="{{user.imageName}}" class="img-thumbnail sidebar-image">
           <p class="sidebar-text">Hello, {{user.username}}</p>
-        {{else}}
-           <img src="./image/no-user-image.png" alt="{{user.imageName}}" class="img-thumbnail sidebar-image">
+          {{else}}
+          <img src="./image/no-user-image.png" alt="{{user.imageName}}" class="img-thumbnail sidebar-image">
           <p class="sidebar-text">Hello, {{user.username}}</p>
-        {{/if}}
-      {{/if}}
+          {{/if}}
+          {{/if}}
+        </div>
+
+        <nav>
+          <ul class="nav">
+            {{#if user}}
+            <li class="nav-item"><a href="/profile/{{user._id}}" class="nav-link">My profile</a></li>
+            {{/if}}
+            <li class="nav-item"><a href="/openings" class="nav-link">Openings</a></li>
+            <li class="nav-item"><a href="/events" class="nav-link">Events</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Find a mentor</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Our database</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
-    <nav>
-      <ul class="navbar-nav navbar">
-        {{#if user}}
-          <li class="nav-item"><a href="/profile/{{user._id}}" class="nav-link">My profile</a></li>
-        {{/if}}
-        <li class="nav-item"><a href="/openings" class="nav-link">Openings</a></li>
-        <li class="nav-item"><a href="/events" class="nav-link">Events</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Find a mentor</a></li>
-        <li class="nav-item"><a href="/network" class="nav-link">Our database</a></li>
-      </ul>
-    </nav>
   </div>
   <div class="home-posts col-7">
     <h2>Posts</h2>
@@ -32,10 +36,14 @@
   </div>
   <aside class="home-side col-3">
     <div class="home-openings">
-      <h2>Openings</h2>
-      {{#each openings}}
-      {{> openingsHome}}
-      {{/each}}
+      <div class="card">
+        <div class="card-body">
+          <h2>Openings</h2>
+          {{#each openings}}
+          {{> openingsHome}}
+          {{/each}}
+        </div>
+      </div>
     </div>
   </aside>
 </div>
