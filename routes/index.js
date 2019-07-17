@@ -194,10 +194,16 @@ router.get('/openings', (req, res) => {
 
 router.get('/edit-opening/:openingID', (req, res) => {
   const openingID = req.params.openingID;
-  res.render('edit-opening', { openingID });
+  Opening.findById(openingID)
+    .then((opening) => {
+      console.log(opening)
+      res.render('edit-opening', { opening });
+    })
+    .catch((err) => console.log(err));
 })
 
 router.post('/edit-opening/:openingID', (req, res) => {
+  const { openingID } = req.params;
   const {
     title,
     description,
@@ -215,9 +221,10 @@ router.post('/edit-opening/:openingID', (req, res) => {
   const author = req.user._id;
   const location = {
     type: 'Point',
-    coordinates: [longitude, latitude]
+    coordinates: [longitude, latitude],
   };
-  Opening.findByIdAndUpdate({ _id: req.params.openingID }, {
+
+  Opening.findByIdAndUpdate(openingID, {
     title,
     description,
     company,
@@ -231,8 +238,8 @@ router.post('/edit-opening/:openingID', (req, res) => {
     city,
     link,
   })
-    .then(() => {res.redirect('/openings')})
-    .catch(err => console.log(err))
+    .then(() => { res.redirect('/openings'); })
+    .catch(err => console.log(err));
 });
 
 router.get('/opening/:openingID', (req, res) => {
@@ -244,7 +251,7 @@ router.get('/opening/:openingID', (req, res) => {
     .catch(err => console.log(err))
 });
 
-router.post('/delete-opening/:openingID', (req, res) => {
+router.get('/delete-opening/:openingID', (req, res) => {
   const openingID = req.params.openingID;
   Opening.findByIdAndDelete(openingID)
     .then(() => { res.redirect('/') })
@@ -363,7 +370,7 @@ router.post('/add-event', uploadCloud.single('event-pic'), (req, res) => {
   }
   newEvent.save()
     .then(() => {
-      res.redirect('/');
+      res.redirect('/events');
     })
     .catch((err) => {
       throw new Error(err);
@@ -439,7 +446,7 @@ router.post('/edit-event/:eventID', uploadCloud.single('event-pic'), (req, res) 
 });
 
 router.get('/delete-event/:eventID', (req, res) => {
-  const eventID = req.params.eventID;
+  const { eventID } = req.params;
   Event.findByIdAndDelete(eventID)
     .then(() => { res.redirect('/events') })
     .catch(err => console.log(err))

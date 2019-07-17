@@ -1,19 +1,19 @@
 <div class="container opening-content py-5">
 	<h1>Edit Opening</h1>
-	<form action="/edit-opening/{{openingID}}" method="post">
+	<form action="/edit-opening/{{opening._id}}" method="post">
 		<div class="form-group">
 			<label for="title">Title</label>
-			<input type="text" name="title" id="title" class="form-control">
+			<input type="text" name="title" id="title" class="form-control" value="{{opening.title}}">
 		</div>
 
 		<div class="form-group">
 			<label for="description">Description</label>
-			<textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+			<input type="text" name="description" id="description" class="form-control" value="{{opening.description}}">
 		</div>
 
 		<div class="form-group">
 			<label for="company">Company</label>
-			<input type="text" name="company" id="company" class="form-control">
+			<input type="text" name="company" id="company" class="form-control" value="{{opening.company}}">
 		</div>
 
 		<div class="form-group">
@@ -26,12 +26,12 @@
 
 		<div class="form-group">
 			<label for="salary">Salary</label>
-			<input type="text" name="salary" id="salary" class="form-control">
+			<input type="text" name="salary" id="salary" class="form-control" value="{{opening.salary}}">
 		</div>
 
 		<div class="form-group">
 			<label for="requirements">Requirements</label>
-			<textarea name="requirements" id="requirements" cols="30" rows="10" class="form-control"></textarea>
+			<input type="text" name="requirements" id="requirements" class="form-control" value="{{opening.requirements}}">
 		</div>
 
 		<div class="form-group">
@@ -52,14 +52,14 @@
 
 		<div class="form-group">
 			<label for="city">City</label>
-			<input type="text" name="city" id="city" class="form-control">
+			<input type="text" name="city" id="city" class="form-control" value="{{opening.city}}">
 		</div>
 
 		<div class="form-group">
 			<label for="location">Location</label>
 			<div class="form-location">
-				<input type="text" name="latitude" placeholder="latitude" class="form-control">
-				<input type="text" name="longitude" placeholder="longitude" class="form-control">
+				<input type="text" name="latitude" placeholder="latitude" class="form-control" value="{{opening.location.coordinates.[1]}}">
+				<input type="text" name="longitude" placeholder="longitude" class="form-control" value="{{opening.location.coordinates.[0]}}">
 			</div>
 		</div>
 
