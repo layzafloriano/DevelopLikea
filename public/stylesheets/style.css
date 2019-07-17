@@ -66,8 +66,13 @@ a:hover {
   height: 100vh;
 }
 
+.sidebar-home {
+  margin-top: -10px;
+}
+
 .home-openings {
-  max-width: 17vw;;
+  max-width: 17vw;
+  margin-top: 10px;
 }
 
 footer {
@@ -134,4 +139,24 @@ footer {
 
 #nav-index{
   max-height: 48px;
+}
+
+.post {
+  max-width: 54vw;
+  margin-top: 20px; 
+}
+
+.post h1 {
+  padding-bottom: 10px;
+}
+
+.post img {
+  max-width: 48vw;
+}
+.post p {
+  text-align: justify;
+}
+
+.post-card {
+  margin-top: 20px;
 }
