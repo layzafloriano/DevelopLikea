@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
               // get events
               Event.find().limit(3)
                 .then((events) => {
-                  res.render('index', { openings, posts, user, events });
+                  res.render('index', { openings, posts, user, events, idUser });
                 })
                 .catch(err => console.log(err));
             })
@@ -266,11 +266,13 @@ router.get('/delete-opening/:openingID', (req, res) => {
 
 router.get('/profile/:userID', (req, res) => {
   const { userID } = req.params;
+  let isOwner = false;
   User.findById(userID)
     .then((user) => {
       Post.find({ authorId: userID })
         .then((post) => {
-          res.render('profile', { user, post });
+          if (req.user.id === userID) isOwner = true;
+          res.render('profile', { user, post, isOwner });
         });
     })
     .catch(err => console.log(err));
@@ -285,7 +287,7 @@ router.get('/edit-profile/:userID', (req, res) => {
 
 router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, res) => {
   const { userID } = req.params;
-  const { username, bio, specialty, mentor, openToOpportunities, city } = req.body;
+  const { username, bio, specialty, mentor, openToOpportunities, city, linkedin, twitter, github } = req.body;
   let valueMentor = false;
   let valueOpportunities = false;
 
@@ -305,6 +307,9 @@ router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, re
       valueMentor,
       valueOpportunities,
       city,
+      linkedin,
+      twitter,
+      github,
       imagePath: req.file.url,
       imageName: req.file.originalname,
     })
@@ -321,6 +326,9 @@ router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, re
       valueMentor,
       valueOpportunities,
       city,
+      linkedin,
+      twitter,
+      github,
     })
       .then(user => res.render('edit-profile', { user }))
       .catch(err => console.log(err));
