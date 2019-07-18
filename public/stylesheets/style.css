@@ -11,6 +11,10 @@ a:hover {
   text-decoration: none;
 }
 
+.card {
+  box-shadow: 0.4px 1px 1px #b6b6b8;
+}
+
 .home-content {
   margin-top: 20px;
   display: flex;
@@ -44,15 +48,21 @@ a:hover {
   font-weight: bold;
 }
 
+.sidebar ul {
+  display: inline-block;
+}
+
 .sidebar ul li {
   list-style-type: none;
-  position: relative;
-  left: -30px;
+  /* position: relative;
+  left: -30px; */
+  padding-left: 0;
+  width: 100%;
 }
 
 
 .sidebar ul li a:hover {
-  color: #f55190;
+  background-color: #f55190;
 }
 
 .sidebar-image {
