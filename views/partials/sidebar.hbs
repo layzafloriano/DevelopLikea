@@ -3,13 +3,8 @@
       <div class="sidebar col-2">
         <div class="profile-data">
           {{#if user}}
-          {{#if user.imagePath}}
           <img src="{{user.imagePath}}" alt="{{user.imageName}}" class="img-thumbnail sidebar-image">
           <p class="sidebar-text">Hello, {{user.username}}</p>
-          {{else}}
-          <img src="./image/no-user-image.png" alt="{{user.imageName}}" class="img-thumbnail sidebar-image">
-          <p class="sidebar-text">Hello, {{user.username}}</p>
-          {{/if}}
           {{/if}}
         </div>
 

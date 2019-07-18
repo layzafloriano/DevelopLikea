@@ -4,6 +4,7 @@ const app = express();
 const flash = require('connect-flash');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+// const axios = require('axios');
 const ensureLogin = require('connect-ensure-login');
 const uploadCloud = require('../config/cloudinary.js');
 const User = require('../models/User');

@@ -10,6 +10,7 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const passport     = require('passport');
+// const axios        = require('axios');
 const LocalStrategy= require('passport-local').Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
 const bcrypt       = require('bcrypt');
@@ -62,6 +63,9 @@ app.use(session({
     ttl: 24 * 60 * 60 // 1 day
   })
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // user serialization
 passport.serializeUser((user, cb) => {
@@ -118,9 +122,6 @@ passport.use(new GitHubStrategy({
     })
     .catch(err => console.log(err));
 }));
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use('/', index);
 
