@@ -2,18 +2,20 @@
 	<div class="profile-box">
 		<div class="profile-top">
 			<div class="nameandedit">
-			<h1>{{user.name}}</h1>
-			{{#if isOwner}}
-			<a href="/edit-profile/{{user._id}}">Edit profile</a>
-			{{/if}}
+				<h1>{{user.name}}</h1>
+				{{#if isOwner}}
+				<a href="/edit-profile/{{user._id}}">Edit profile</a>
+				{{/if}}
 			</div>
+			{{#if user.username}}
 			<p>@{{user.username}}</p>
+			{{/if}}
 			<p>{{user.bio}}</p>
 			<p>{{user.specialty}}</p>
 			<p>{{user.city}}</p>
 			<a href=""><img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563460219/project-02/github-logo_kvmzvn.svg" class="profile-logo" alt="github logo"></a>
 			<a href=""><img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563460219/project-02/twitter-logo-button_p9lb9p.svg" class="profile-logo" alt="twitter logo"></a>
-			<a href=""><img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563460219/project-02/facebook-logo-button_jhq9xe.svg" class="profile-logo" alt="facebook logo"></a>
+			<a href=""><img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563470743/project-02/linkedin_td0m6v.svg" class="profile-logo" alt="linkedin logo"></a>
 		</div>
 				<div>
 				<img src="{{user.imagePath}}" alt="profile picture">
@@ -26,7 +28,9 @@
 		<div class="posts">
 			{{#each post}}
 			<h3><a href="">{{this.title}}</a></h3>
+			<picture>
 			<img src="{{this.imagePath}}" alt="post image">
+			</picture>
 			{{/each}}
 		</div>
 		</div>

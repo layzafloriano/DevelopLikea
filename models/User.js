@@ -40,7 +40,10 @@ const userSchema = new Schema({
   imagePath: {
     type: String,
     default: '../image/no-user-image.png',
-  }
+  },
+  linkedin: String,
+  twitter: String,
+  github: String,
 }, {
   timestamps: true,
 });
