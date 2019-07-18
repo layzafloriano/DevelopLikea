@@ -76,7 +76,6 @@ a:hover {
 
 .sidebar-card {
   height: 100vh;
-  box-shadow: 4px;
 }
 
 .sidebar-home {
@@ -200,8 +199,13 @@ footer {
   margin-top: 0 auto;
 }
 
-.card-openings {
+.card-content-pages {
   margin-top: 20px;
+}
+
+.card-content-pages h3 {
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .sidebar-post {
@@ -363,4 +367,8 @@ footer {
     margin: 0 auto;
     padding-left: 0;
   }
+}
+
+.box-events-card {
+  justify-content: space-between;
 }
