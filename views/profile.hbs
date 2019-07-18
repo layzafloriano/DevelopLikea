@@ -13,9 +13,9 @@
 			<p>{{user.bio}}</p>
 			<p>{{user.specialty}}</p>
 			<p>{{user.city}}</p>
-			<a href=""><img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563460219/project-02/github-logo_kvmzvn.svg" class="profile-logo" alt="github logo"></a>
-			<a href=""><img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563460219/project-02/twitter-logo-button_p9lb9p.svg" class="profile-logo" alt="twitter logo"></a>
-			<a href=""><img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563470743/project-02/linkedin_td0m6v.svg" class="profile-logo" alt="linkedin logo"></a>
+			<a href="{{user.github}}" target="_blank"><img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563460219/project-02/github-logo_kvmzvn.svg" class="profile-logo" alt="github logo"></a>
+			<a href="{{user.twitter}}" target="_blank"><img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563460219/project-02/twitter-logo-button_p9lb9p.svg" class="profile-logo" alt="twitter logo"></a>
+			<a href="{{user.linkedin}}" target="_blank"><img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563470743/project-02/linkedin_td0m6v.svg" class="profile-logo" alt="linkedin logo"></a>
 		</div>
 				<div>
 				<img src="{{user.imagePath}}" alt="profile picture">
@@ -27,7 +27,7 @@
 		<div class="card-box outer-box-posts">
 		<div class="posts">
 			{{#each post}}
-			<h3><a href="">{{this.title}}</a></h3>
+			<h3><a href="/post/{{this._id}}">{{this.title}}</a></h3>
 			<picture>
 			<img src="{{this.imagePath}}" alt="post image">
 			</picture>

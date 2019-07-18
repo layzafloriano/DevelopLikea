@@ -1,5 +1,5 @@
 <div class="home-content container">
-  <nav class="sidebar-home">
+  <nav class="sidebar-home col-3">
     {{> sidebar}}
   </nav>
     <div class="home-posts col-7">
@@ -11,18 +11,16 @@
       <div class="home-openings">
         <div class="card">
           <div class="card-body">
-            <h4>Openings: </h4>
+            <h5>Opportunities: </h5>
             {{#each openings}}
             {{> openingsHome}}
             {{/each}}
 
-            <hr>
             
-            <h4>Events: </h4>
+            <h5 class="mt-5">Events: </h5>
             {{#each events}}
             {{> eventsHome}}
             {{/each}}
-
           </div>
         </div>
       </div>

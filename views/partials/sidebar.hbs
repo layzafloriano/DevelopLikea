@@ -1,9 +1,9 @@
   <div class="card mr-3 sidebar-card">
     <div class="card-body">
-      <div class="sidebar col-2">
+      <div class="sidebar">
         <div class="profile-data">
           {{#if user}}
-          <img src="{{user.imagePath}}" alt="{{user.imageName}}" class="img-thumbnail sidebar-image">
+          <img src="{{user.imagePath}}" alt="{{user.imageName}}" class="img-thumbnail img-fluid sidebar-image">
           <p class="sidebar-text">Hello, {{user.name}}</p>
           {{/if}}
         </div>
@@ -14,7 +14,7 @@
             <li class="nav-item"><a href="/profile/{{user._id}}" class="nav-link">My profile</a></li>
             {{/if}}
             <li class="nav-item"><a href="/add-post" class="nav-link">New post</a></li>
-            <li class="nav-item"><a href="/openings" class="nav-link">Openings</a></li>
+            <li class="nav-item"><a href="/openings" class="nav-link">Opportunities</a></li>
             <li class="nav-item"><a href="/events" class="nav-link">Events</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Find a mentor</a></li>
             <li class="nav-item"><a href="/network" class="nav-link">Our database</a></li>
