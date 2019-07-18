@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
 @import url('https://fonts.googleapis.com/css?family=DM+Sans&display=swap');
 
+
 body {
   background-color: #f9f9fa;
   font-family: 'Playfair Display', serif;
@@ -16,7 +17,8 @@ a:hover {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  min-height: 1vh;
+  min-height: 100vh;
+  max-width: 87vw;
 }
 
 .home-posts {
@@ -24,6 +26,7 @@ a:hover {
   max-width: 45vw;
   font-family: 'DM Sans', sans-serif;
 }
+
 .home-posts a {
   color: #000;
   font-family: 'Playfair Display', serif;
@@ -53,7 +56,7 @@ a:hover {
 }
 
 .sidebar-image {
-  max-width: 150px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -76,7 +79,7 @@ a:hover {
   margin-top: 10px;
 }
 
-.home-openings p { 
+.home-openings p {
   font-family: 'DM Sans', sans-serif;
 }
 
@@ -125,13 +128,7 @@ footer {
 
 .nav-color {
   background-color: #FFAB90;
-  /*FF928F*/
 }
-/* 
-.nav-color a{
-  color: #FFFFFF;
-} */
-
 
 .nav-img-logo {
   max-height: 30px;
@@ -148,7 +145,7 @@ footer {
 
 .post {
   max-width: 54vw;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 .post h1 {
@@ -158,6 +155,7 @@ footer {
 .post img {
   max-width: 48vw;
 }
+
 .post p {
   text-align: justify;
 }
@@ -213,6 +211,7 @@ footer {
   margin-top: 40px;
   margin-bottom: 30px;
 }
+
 
 .profile-top p {
   font-family: 'DM Sans', sans-serif;
@@ -301,4 +300,35 @@ footer {
   margin-bottom: 20px;
   margin-top: 24px;
   margin-left: 4px;
+}
+
+
+/* Media queries */
+
+@media (max-width: 1000px) {
+  .sidebar-home {
+    display: none;
+  }
+
+  .home-posts {
+    min-width: 65vw;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .home-openings {
+    min-width: 20vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-side {
+    display: none;
+  }
+
+  .home-posts {
+    min-width: 85vw;
+    margin: 0 auto;
+    padding-left: 0;
+  }
 }
