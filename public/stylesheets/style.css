@@ -64,6 +64,7 @@ a:hover {
 
 .sidebar-card {
   height: 100vh;
+  box-shadow: 4px;
 }
 
 .sidebar-home {
@@ -200,8 +201,8 @@ footer {
 
 .profile-box img {
   max-height: 120px;
-  margin-right: 20px;
-  margin-top: 20px;
+  margin-right: 25px;
+  margin-top: 25px;
 }
 
 .profile-box {
@@ -236,11 +237,15 @@ footer {
 
 .box-posts {
   padding: 15px;
-  max-width: 675px;
+  max-width: 700px;
   display: flex;
   justify-content: center;
   margin: 0 auto;
   margin-bottom: 20px;
+}
+
+.posts {
+  max-width: 650px;
 }
 
 .posts h3 {
@@ -253,7 +258,17 @@ footer {
 }
 
 .box-posts img {
-  max-width: 600px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.box-posts picture {
+  display: flex;
+  justify-content: center;
+}
+
+.box-posts h3 {
+  text-align: inherit
 }
 
 .outer-box-posts {
@@ -263,4 +278,5 @@ footer {
 
 .profile-content {
   min-height: 70vh;
+  max-width: 100vw;
 }
