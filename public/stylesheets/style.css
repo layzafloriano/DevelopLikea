@@ -128,7 +128,7 @@ footer {
 
 .nav-color {
   background-color: #FFAB90;
-
+}
 
 .nav-img-logo {
   max-height: 30px;
@@ -165,7 +165,7 @@ footer {
 }
 
 .sidebar-openings {
-  margin-top: 20px;
+  margin-top: 0 auto;
 }
 
 .card-openings {
@@ -193,7 +193,7 @@ footer {
 }
 
 .image-events {
-  max-height: 300px;
+  max-height: 150px;
 }
 
 .profile-box img {
@@ -278,6 +278,30 @@ footer {
   min-height: 70vh;
   max-width: 100vw;
 }
+
+.edit-profile-pic {
+  max-height: 100px;
+}
+
+.event-page {
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.event-page img {
+  margin-top: 10px;
+}
+
+.sidebar-events {
+  margin-top: 30px;
+}
+
+.card-events h3 {
+  margin-bottom: 20px;
+  margin-top: 24px;
+  margin-left: 4px;
+}
+
 
 /* Media queries */
 
