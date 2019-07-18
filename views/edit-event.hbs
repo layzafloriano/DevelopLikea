@@ -1,0 +1,65 @@
+<div class="event-size my-5">
+	<form action="/edit-event/{{event._id}}" method="POST" enctype="multipart/form-data">
+	<h1>Edit Event</h1>
+		<div class="form-group">
+			<label>Title:</label>
+			<input type="text" class="form-control" name="title" id="title" value="{{event.title}}">
+		</div>
+
+		<div class="form-group">
+			<label for="description">Description:</label>
+			<textarea name="description" class="form-control" id="description" cols="30" rows="10">{{event.description}}</textarea>
+		</div>
+
+		<div class="form-group">
+		<label for="date">Date:</label>
+		<input type="datetime-local" class="form-control" name="time" id="time" value="{{event.time}}">
+		</div>
+
+		<div class="form-group">
+		<label for="city">City:</label>
+		<input type="text" class="form-control" name="city" id="city" value="{{event.city}}">
+		</div>
+
+		<div class="form-group">
+		<label for="price">Price:</label>
+		<input type="text" class="form-control" name="price" id="price" value="{{event.price}}">
+		</div>
+
+		<div class="form-group">
+		<label for="location">Location</label>
+		<input type="text" name="latitude" placeholder="latitude" value="{{event.latitude}}">
+		<input type="text" name="longitude" placeholder="longitude" value="{{event.longitude}}">
+		</div>
+
+		<div class="form-group">
+		<label for="add-picture">Add Picture
+			<br>
+		<img src="{{event.imagePath}}" alt="image Name">
+		<input type="file" class="form-control-file" name="event-pic" id="event-pic">
+		</label>
+		</div>
+
+		<button class="btn btn-primary" type="submit">Edit event</button>
+		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete event</button>
+
+	</form>
+
+	{{!-- *****Modal***** --}}
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Are you sure?</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary"><a href="/delete-event/{{event._id}}">Delete</a></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

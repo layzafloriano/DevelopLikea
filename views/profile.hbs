@@ -1,0 +1,11 @@
+<img src="{{user.imagePath}}" alt="profile picture">
+<h1>{{user.username}}</h1>
+<p>{{user.bio}}</p>
+<p>{{user.specialty}}</p>
+<p>{{user.city}}</p>
+{{#each post}}
+<p><a href="">{{this.title}}</a></p>
+{{/each}}
+<a href="/edit-profile/{{user._id}}">Edit profile</a>
+{{!-- <p>{{user.}}</p>
+<p>{{user.}}</p> --}}

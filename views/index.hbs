@@ -1,2 +1,30 @@
-<h1>Test page</h1>
-{{!-- {{> posts-feed}} --}}
+<div class="home-content container">
+  <nav class="sidebar-home">
+    {{> sidebar}}
+  </nav>
+    <div class="home-posts col-7">
+      {{#each posts}}
+      {{> postsFeed}}
+      {{/each}}
+    </div>
+    <aside class="home-side col-3">
+      <div class="home-openings">
+        <div class="card">
+          <div class="card-body">
+            <h3>Openings: </h3>
+            {{#each openings}}
+            {{> openingsHome}}
+            {{/each}}
+
+            <hr>
+            
+            <h3>Events: </h3>
+            {{#each events}}
+            {{> eventsHome}}
+            {{/each}}
+
+          </div>
+        </div>
+      </div>
+    </aside>
+</div>

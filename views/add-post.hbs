@@ -1,5 +1,9 @@
-<h1>Create Post</h1>
-<div class="container">
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+<script>tinymce.init({selector:'textarea'});</script>
+
+<div class="container py-5">
+  <h1>Create Post</h1>
   <form action="/add-post" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label for="title">Title</label>
@@ -10,6 +14,6 @@
       <textarea class="form-control" id="text" name="text" rows="15"></textarea>
     </div>
     <input type="file" class="form-control-file" id="photo" name="photo">
-    <button type="submit" class="btn btn-primary">Send</button>
+    <button type="submit" class="btn btn-primary mt-3">Send</button>
   </form>
 </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 require('dotenv').config();
 
 const bodyParser   = require('body-parser');
@@ -9,12 +10,14 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const passport     = require('passport');
+// const axios        = require('axios');
 const LocalStrategy= require('passport-local').Strategy;
+const GitHubStrategy = require('passport-github').Strategy;
 const bcrypt       = require('bcrypt');
 const User = require('./models/User')
 const session      = require("express-session");
 const MongoStore   = require('connect-mongo')(session);
-const flash        = require("connect-flash");
+const flash        = require('connect-flash');
 const index        = require('./routes/index');
 const authRoutes = require('./routes/authentication');
 
@@ -34,15 +37,15 @@ mongoose
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
-hbs.registerPartials(path.join(__dirname, '/views/partials'));
 
-// hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerPartials(`${__dirname  }/views/partials`);
 
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(flash());
 
 // config hbs e favicon
 app.set('views', path.join(__dirname, 'views'));
@@ -61,6 +64,9 @@ app.use(session({
   })
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 // user serialization
 passport.serializeUser((user, cb) => {
   cb(null, user._id);
@@ -72,8 +78,7 @@ passport.deserializeUser((id, cb) => {
     cb(null, user);
   });
 });
-  
-  
+
 passport.use(new LocalStrategy({
   passReqToCallback: true
 }, (req, username, password, next) => {
@@ -82,19 +87,41 @@ passport.use(new LocalStrategy({
       return next(err);
     }
     if (!user) {
-      return next(null, false, { message: "Incorrect username" });
+      return next(null, false, { message: req.flash('Incorrect username') });
     }
     if (!bcrypt.compareSync(password, user.password)) {
-      return next(null, false, { message: "Incorrect password" });
+      return next(null, false, { message: 'Incorrect password' });
     }
     console.log('session:', user);
-      
     return next(null, user);
   });
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+passport.use(new GitHubStrategy({
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: 'http://127.0.0.1:3000/auth/github/callback',
+},
+(accessToken, refreshToken, profile, done) => {
+  console.log(profile);
+  User.findOne({ githubId: profile.id })
+    .then((user) => {
+      if (user) {
+        return done(null, user);
+      }
+      const newUser = new User({
+        githubId: profile.id,
+        name: profile._json.name,
+        imagePath: profile.photos[0].value,
+        imageName: 'Github Image',
+      });
+      newUser.save()
+        .then((user) => {
+          done(null, newUser);
+        });
+    })
+    .catch(err => console.log(err));
+}));
 
 app.use('/', index);
 

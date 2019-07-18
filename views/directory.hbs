@@ -1,0 +1,17 @@
+<div class="container d-flex">
+  <nav class="sidebar-openings">
+    {{> sidebar}}
+  </nav>
+	<div class="col-8 card-openings">
+		<h1>Network!</h1>
+		{{#each users}}
+		<div class="card mb-3 network">	
+				<img src="{{imagePath}}" alt="profile picture" class="networking">
+			<div class="card-body ">
+				<h5><a href="/profile/{{_id}}">{{name}}</a></h4>
+				<p>{{specialty}}</p>
+			</div>
+		</div>
+		{{/each}}
+	</div>
+</div>

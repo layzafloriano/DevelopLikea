@@ -1,0 +1,24 @@
+  <div class="card mr-3 sidebar-card">
+    <div class="card-body">
+      <div class="sidebar col-2">
+        <div class="profile-data">
+          {{#if user}}
+          <img src="{{user.imagePath}}" alt="{{user.imageName}}" class="img-thumbnail sidebar-image">
+          <p class="sidebar-text">Hello, {{user.username}}</p>
+          {{/if}}
+        </div>
+
+        <nav>
+          <ul class="nav">
+            {{#if user}}
+            <li class="nav-item"><a href="/profile/{{user._id}}" class="nav-link">My profile</a></li>
+            {{/if}}
+            <li class="nav-item"><a href="/openings" class="nav-link">Openings</a></li>
+            <li class="nav-item"><a href="/events" class="nav-link">Events</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Find a mentor</a></li>
+            <li class="nav-item"><a href="/network" class="nav-link">Our database</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>

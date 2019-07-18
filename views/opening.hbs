@@ -1,0 +1,25 @@
+<div class="container d-flex">
+  <nav class="sidebar-openings">
+    {{> sidebar}}
+  </nav>
+	<div class="card col-8 card-openings">
+		<div class="card-box">
+			<h1>Opening Details</h1>
+			<p>{{opening.title}}</p>
+			<p>{{{opening.description}}}</p>
+			<p>{{opening.company}}</p>
+			<p>{{opening.salary}}</p>
+			<p>{{{opening.requirements}}}</p>
+			<p>{{opening.specialty}}</p>
+			<p>{{opening.type}}</p>
+			<p>{{opening.level}}</p>
+			<p>{{opening.city}}</p>
+			<a href="{{opening.link}}">Apply to this position</a>
+			<br>
+			{{!-- make sure this user is the author --}}
+			{{!-- {{#if user}} --}}
+			<a href="/edit-opening/{{opening._id}}">Edit this opening</a>
+			{{!-- {{/if}} --}}
+		</div>
+	</div>
+</div>

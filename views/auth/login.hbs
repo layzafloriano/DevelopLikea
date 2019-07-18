@@ -1,27 +1,28 @@
-<h2>Login</h2>
-
-<form action="/auth/login" method="POST">
-  <div>
-    <label for="username">Username:</label>
-    <input type="text" name="username">
+<div class="form-background">
+  <div class="card card-login">
+    <div class="card-body">
+      <h2>Login</h2>
+      <form action="/auth/login" method="POST">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" name="username" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" name="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Log In</button>
+        <p class="account-message mt-4">
+          Don't you already have an account?
+          <a href="/auth/signup">Signup</a>
+        </p>
+        {{#if message}}
+        <div class="error-message">{{ message }}</div>
+        {{/if}}
+        <div>
+          <a href="/auth/github">Login With Github!</a>
+        </div>
+      </form>
+    </div>
   </div>
-    <br><br>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" name="password">
-  </div>
-  {{#if message}}
-  <div class="error-message">{{ message }}</div>
-  {{/if}}
-    <br><br>
-  <div>
-    <input type="submit" value="Log In">
-    <a href="/auth/slack">Login With Slack</a> |
-    <a href="/auth/google">Login With Google</a>
-  </div>
-  
-  <p class="account-message">
-    Don't you already have an account?
-    <a href="/auth/signup">Signup</a>
-  </p>
-</form>
+</div>

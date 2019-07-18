@@ -2,14 +2,16 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
+  githubId: String,
+  name: String,
   username: {
     type: String,
     unique: true,
-    required: true
+    // required: true
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
   status: {
     type: String,
@@ -18,11 +20,11 @@ const userSchema = new Schema({
   confirmationCode: {
     type: String,
     unique: true,
-    required: true,
+    // required: true,
   },
   email: {
     type: String,
-    required: true,
+    // required: true,
     unique: true,
   },
   mentor: Boolean,
@@ -35,12 +37,12 @@ const userSchema = new Schema({
   bio: String,
   number: String,
   imageName: String,
-  imagePath: String
+  imagePath: {
+    type: String,
+    default: '../image/no-user-image.png',
+  }
 }, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
-  },
+  timestamps: true,
 });
 
 const User = mongoose.model('User', userSchema);

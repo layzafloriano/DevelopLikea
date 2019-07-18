@@ -1,0 +1,20 @@
+<div class="container d-flex">
+  <nav class="sidebar-openings">
+    {{> sidebar}}
+  </nav>
+	<div class="col-8 card-openings">
+		{{#each openings}}
+		<div class="card mb-3">	
+			<div class="card-body">
+				<h2>{{title}}</h2>
+				<p>Company: {{company}}</p>
+				<p>Specialty: {{specialty}}</p>
+				<p>Level: {{level}}</p>
+				<p>City: {{city}}</p>
+				<p><a href="/opening/{{_id}}">Find out more</a></p>
+				<hr>
+			</div>
+		</div>
+		{{/each}}
+	</div>
+</div>
