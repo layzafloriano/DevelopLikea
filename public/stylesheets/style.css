@@ -57,12 +57,11 @@ a:hover {
   /* position: relative;
   left: -30px; */
   padding-left: 0;
-  width: 100%;
 }
 
 
 .sidebar ul li a:hover {
-  background-color: #f55190;
+  color: #FFAB90;
 }
 
 .sidebar-image {
@@ -83,6 +82,19 @@ a:hover {
   margin-top: 10px;
 }
 
+.home-side {
+  line-height: 15px;
+}
+
+.home-side h6 {
+  font-size: 0.9em;
+}
+
+.home-side p {
+  font-size: 0.9em;
+  margin: 0 0 10px 0;
+}
+
 .home-openings {
   max-width: 17vw;
   margin-top: 10px;
@@ -90,6 +102,16 @@ a:hover {
 
 .home-openings p {
   font-family: 'DM Sans', sans-serif;
+}
+
+.openings-home {
+  /* padding: 20px; */
+  border-bottom: 1px #b6b6b8 solid;
+}
+
+.events-home {
+  /* padding: 20px; */
+  border-bottom: 1px #b6b6b8 solid;
 }
 
 footer {
