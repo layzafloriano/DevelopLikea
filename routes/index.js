@@ -266,11 +266,13 @@ router.get('/delete-opening/:openingID', (req, res) => {
 
 router.get('/profile/:userID', (req, res) => {
   const { userID } = req.params;
+  let isOwner = false;
   User.findById(userID)
     .then((user) => {
       Post.find({ authorId: userID })
         .then((post) => {
-          res.render('profile', { user, post });
+          if (req.user.id === userID) isOwner = true;
+          res.render('profile', { user, post, isOwner });
         });
     })
     .catch(err => console.log(err));
