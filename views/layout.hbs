@@ -8,14 +8,13 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <title>Document</title>
+  <title>Develop like a @</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg nav-color" id="nav-index">
+  <nav class="navbar navbar-expand-lg nav-color navbar-light">
     <div class="container px-5">
       <a href="/"><img src="../image/Develop like @.png" alt="" class="nav-img-logo"></a>
-      {{!-- <a class="navbar-brand" href="#">Project 02</a> --}}
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -26,20 +25,51 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/add-post">Add post</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/openings" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Openings
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/add-opening">New opening</a>
+              <a class="dropdown-item" href="/openings">Openings</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/openings" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Events
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/add-event">New event</a>
+              <a class="dropdown-item" href="/events">Events</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/network">Our database</a>
+          </li>
+          {{#unless idUser}}
+          <li class="nav-item">
             <a class="nav-link" href="/auth/login">Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/auth/signup">Signup</a>
           </li>
+          {{/unless}}
+          {{#if idUser}}
           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
           </li>
+          {{/if}}
         </ul>
       </div>
     </div>
   </nav>
 
   {{{body}}}
+
   <footer>
     <div class="footer-icons">
       <img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563297818/profile/facebook_r05psw.svg"
@@ -49,7 +79,7 @@
       <img src="https://res.cloudinary.com/layzafloriano/image/upload/v1563297818/profile/twitter_fvja2j.svg"
         alt="Twitter Icon">
     </div>
-    <p class="mt-4">Copyright 2019 © - Projeto 02 - All rights reserved. </p>
+    <p class="mt-4">Copyright 2019 © - Develop like a @ - All rights reserved. </p>
   </footer>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -123,14 +123,13 @@ footer {
 }
 
 .nav-color {
-  background: #FFAB90;
-  color: #FFFFFF;
+  background-color: #FFAB90;
   /*FF928F*/
 }
-
+/* 
 .nav-color a{
   color: #FFFFFF;
-}
+} */
 
 
 .nav-img-logo {
@@ -142,8 +141,8 @@ footer {
   justify-content: flex-end;
 }
 
-#nav-index{
-  max-height: 48px;
+.dropdown-menu {
+  background-color: #FFAB90;
 }
 
 .post {
