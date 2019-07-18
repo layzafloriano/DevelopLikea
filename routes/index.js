@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
               // get events
               Event.find().limit(3)
                 .then((events) => {
-                  res.render('index', { openings, posts, user, events });
+                  res.render('index', { openings, posts, user, events, idUser });
                 })
                 .catch(err => console.log(err));
             })

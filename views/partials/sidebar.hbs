@@ -4,7 +4,7 @@
         <div class="profile-data">
           {{#if user}}
           <img src="{{user.imagePath}}" alt="{{user.imageName}}" class="img-thumbnail sidebar-image">
-          <p class="sidebar-text">Hello, {{user.username}}</p>
+          <p class="sidebar-text">Hello, {{user.name}}</p>
           {{/if}}
         </div>
 
@@ -13,6 +13,7 @@
             {{#if user}}
             <li class="nav-item"><a href="/profile/{{user._id}}" class="nav-link">My profile</a></li>
             {{/if}}
+            <li class="nav-item"><a href="/add-post" class="nav-link">New post</a></li>
             <li class="nav-item"><a href="/openings" class="nav-link">Openings</a></li>
             <li class="nav-item"><a href="/events" class="nav-link">Events</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Find a mentor</a></li>
