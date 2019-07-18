@@ -10,6 +10,7 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const passport     = require('passport');
+// const axios        = require('axios');
 const LocalStrategy= require('passport-local').Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
 const bcrypt       = require('bcrypt');
@@ -63,6 +64,9 @@ app.use(session({
   })
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 // user serialization
 passport.serializeUser((user, cb) => {
   cb(null, user._id);
@@ -99,6 +103,7 @@ passport.use(new GitHubStrategy({
   callbackURL: 'http://127.0.0.1:3000/auth/github/callback',
 },
 (accessToken, refreshToken, profile, done) => {
+  console.log(profile);
   User.findOne({ githubId: profile.id })
     .then((user) => {
       if (user) {
@@ -117,9 +122,6 @@ passport.use(new GitHubStrategy({
     })
     .catch(err => console.log(err));
 }));
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use('/', index);
 

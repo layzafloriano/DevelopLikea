@@ -37,7 +37,10 @@ const userSchema = new Schema({
   bio: String,
   number: String,
   imageName: String,
-  imagePath: String,
+  imagePath: {
+    type: String,
+    default: '../image/no-user-image.png',
+  }
 }, {
   timestamps: true,
 });

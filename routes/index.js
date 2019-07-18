@@ -4,6 +4,7 @@ const app = express();
 const flash = require('connect-flash');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+// const axios = require('axios');
 const ensureLogin = require('connect-ensure-login');
 const uploadCloud = require('../config/cloudinary.js');
 const User = require('../models/User');
@@ -24,12 +25,17 @@ router.get('/', (req, res) => {
     .then((post) => {
       const posts = post.reverse();
       // get openings
-      Opening.find()
+      Opening.find().limit(3)
         .then((openings) => {
           // get user details
           User.findById(idUser)
             .then((user) => {
-              res.render('index', { openings, posts, user });
+              // get events
+              Event.find().limit(3)
+                .then((events) => {
+                  res.render('index', { openings, posts, user, events });
+                })
+                .catch(err => console.log(err));
             })
             .catch(err => console.log(err));
         })
@@ -149,7 +155,7 @@ router.post('/add-opening', (req, res) => {
     description,
     company,
     salary,
-    requirements, 
+    requirements,
     type,
     level,
     city,
@@ -193,13 +199,13 @@ router.get('/openings', (req, res) => {
 });
 
 router.get('/edit-opening/:openingID', (req, res) => {
-  const openingID = req.params.openingID;
+  const { openingID } = req.params;
   Opening.findById(openingID)
     .then((opening) => {
       console.log(opening)
       res.render('edit-opening', { opening });
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 })
 
 router.post('/edit-opening/:openingID', (req, res) => {
@@ -243,26 +249,26 @@ router.post('/edit-opening/:openingID', (req, res) => {
 });
 
 router.get('/opening/:openingID', (req, res) => {
-  const openingID = req.params.openingID;
+  const { openingID } = req.params;
   Opening.findById(openingID)
     .then((opening) => {
-      res.render('opening', { opening })
+      res.render('opening', { opening });
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
 });
 
 router.get('/delete-opening/:openingID', (req, res) => {
-  const openingID = req.params.openingID;
+  const { openingID } = req.params;
   Opening.findByIdAndDelete(openingID)
-    .then(() => { res.redirect('/') })
-    .catch(err => console.log(err))
+    .then(() => { res.redirect('/'); })
+    .catch(err => console.log(err));
 });
 
 router.get('/profile/:userID', (req, res) => {
-  const userID = req.params.userID;
+  const { userID } = req.params;
   User.findById(userID)
     .then((user) => {
-      Post.find({authorId: userID})
+      Post.find({ authorId: userID })
         .then((post) => {
           res.render('profile', { user, post });
         });
@@ -271,14 +277,14 @@ router.get('/profile/:userID', (req, res) => {
 });
 
 router.get('/edit-profile/:userID', (req, res) => {
-  const userID = req.params.userID;
+  const { userID } = req.params;
   User.findById(userID)
     .then(user => res.render('edit-profile', { userID, user }))
     .catch(err => console.log(err));
 });
 
 router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, res) => {
-  const userID = req.params.userID;
+  const { userID } = req.params;
   const { username, bio, specialty, mentor, openToOpportunities, city } = req.body;
   let valueMentor = false;
   let valueOpportunities = false;
@@ -322,7 +328,7 @@ router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, re
 });
 
 router.get('/delete-profile/:userID', (req, res) => {
-  const userID = req.params.userID;
+  const { userID } = req.params;
   User.findByIdAndDelete(userID)
     .then(() => res.redirect('/auth/signup'))
     .catch(err => console.log(err));
@@ -331,7 +337,7 @@ router.get('/delete-profile/:userID', (req, res) => {
 router.get('/logout', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   req.logout();
   res.redirect('/');
-})
+});
 
 router.get('/add-event', (req, res) => {
   res.render('add-event');
@@ -378,14 +384,14 @@ router.post('/add-event', uploadCloud.single('event-pic'), (req, res) => {
 });
 
 router.get('/event/:eventID', (req, res) => {
-  let eventID = req.params.eventID;
+  const { eventID } = req.params;
   Event.findById(eventID)
     .then((event) => {
       res.render('event', { event });
     })
     .catch((err) => {
       throw new Error(err);
-    })
+    });
 });
 
 router.get('/events', (req, res) => {
@@ -397,7 +403,7 @@ router.get('/events', (req, res) => {
 });
 
 router.get('/edit-event/:eventID', (req, res) => {
-  const eventID = req.params.eventID;
+  const { eventID } = req.params;
   Event.findById(eventID)
     .then(event => res.render('edit-event', { eventID, event }))
     .catch((err) => {
@@ -407,7 +413,7 @@ router.get('/edit-event/:eventID', (req, res) => {
 
 
 router.post('/edit-event/:eventID', uploadCloud.single('event-pic'), (req, res) => {
-  const eventID = req.params.eventID;
+  const { eventID } = req.params;
   const { title, time, city, description, price, latitude, longitude } = req.body;
   const location = {
     type: 'Point',
@@ -458,6 +464,6 @@ router.get('/network', (req, res) => {
     .catch((err) => {
       throw newError(err);
     });
-})
+});
 
 module.exports = router;
