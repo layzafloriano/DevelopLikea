@@ -326,6 +326,7 @@ footer {
 
 .event-page img {
   margin-top: 10px;
+  width: inherit;
 }
 
 .sidebar-events {
@@ -338,11 +339,23 @@ footer {
   margin-left: 4px;
 }
 
+.box-events-card {
+  justify-content: space-between;
+}
+
 
 /* Media queries */
 
 @media (max-width: 1000px) {
   .sidebar-home {
+    display: none;
+  }
+
+  .sidebar-events {
+    display: none;
+  }
+
+  .sidebar-event {
     display: none;
   }
 
@@ -355,6 +368,12 @@ footer {
   .home-openings {
     min-width: 20vw;
   }
+
+  .card-event, .card-content-pages {
+    min-width: 80vw;
+    margin: 0 auto;
+  }
+
 }
 
 @media (max-width: 900px) {
@@ -367,8 +386,7 @@ footer {
     margin: 0 auto;
     padding-left: 0;
   }
-}
-
-.box-events-card {
-  justify-content: space-between;
+  .box-events-card {
+    flex-direction: column;
+  }
 }
