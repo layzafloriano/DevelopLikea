@@ -1,24 +1,25 @@
-<div class="container d-flex">
-  <nav class="sidebar-openings">
-    {{> sidebar}}
-  </nav>
+<div class="container d-flex mb-4">
+	<nav class="sidebar-openings mt-3 col-3">
+		{{> sidebar}}
+	</nav>
 	<div class="card col-8 card-content-pages">
-		<div class="card-box">
-			<h1>{{opening.title}}</h1>
-			<p>{{{opening.description}}}</p>
-			<p>{{opening.company}}</p>
-			<p>{{opening.salary}}</p>
-			<p>{{{opening.requirements}}}</p>
-			<p>{{opening.specialty}}</p>
-			<p>{{opening.type}}</p>
-			<p>{{opening.level}}</p>
-			<p>{{opening.city}}</p>
+		<div class="card-box p-3">
+			<h1 class="mb-3">{{opening.title}}</h1>
+			<p>Description: {{{opening.description}}}</p>
+			<p>Company: {{opening.company}}</p>
+			<p>Salary: {{opening.salary}}</p>
+			<p>Requirements: {{{opening.requirements}}}</p>
+			<p>Specialty: {{opening.specialty}}</p>
+			<p>Type: {{opening.type}}</p>
+			<p>Level: {{opening.level}}</p>
+			<p>City: {{opening.city}}</p>
+			{{#if opening.link}}
 			<a href="{{opening.link}}">Apply to this position</a>
-			<br>
-			{{!-- make sure this user is the author --}}
-			{{!-- {{#if user}} --}}
+			{{/if}}
+
+			{{#if isOwner}}
 			<a href="/edit-opening/{{opening._id}}">Edit this opening</a>
-			{{!-- {{/if}} --}}
+			{{/if}}
 		</div>
 	</div>
 </div>
