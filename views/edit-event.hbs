@@ -1,4 +1,4 @@
-<div class="event-size my-5">
+<div class="event-size container my-5">
 	<form action="/edit-event/{{event._id}}" method="POST" enctype="multipart/form-data">
 	<h1>Edit Event</h1>
 		<div class="form-group">
@@ -28,14 +28,14 @@
 
 		<div class="form-group">
 		<label for="location">Location</label>
-		<input type="text" name="latitude" placeholder="latitude" value="{{event.latitude}}">
-		<input type="text" name="longitude" placeholder="longitude" value="{{event.longitude}}">
+		<input type="text" name="latitude" placeholder="latitude" class="form-control" value="{{event.latitude}}">
+		<input type="text" name="longitude" placeholder="longitude" class="form-control" value="{{event.longitude}}">
 		</div>
 
 		<div class="form-group">
 		<label for="add-picture">Add Picture
 			<br>
-		<img src="{{event.imagePath}}" alt="image Name">
+		<img src="{{event.imagePath}}" alt="image Name" width="100%">
 		<input type="file" class="form-control-file" name="event-pic" id="event-pic">
 		</label>
 		</div>
