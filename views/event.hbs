@@ -2,16 +2,16 @@
   <nav class="sidebar-event col-3">
     {{> sidebar}}
   </nav>
-	<div class="card col-8 card-event">
-		<div class="card-body event-page">
-            <h1>{{event.title}}</h1>
-            <img src="{{event.imagePath}}" alt="{{event.imageName}}" class="img-fluid">
-            <p>Date: {{event.date}}</p>
-            <p>City: {{event.city}}</p>
-            <p>Price: {{event.price}}</p>
-			{{!-- {{#if user}} --}}
-			<a href="/edit-event/{{event._id}}">Edit this event</a>
-			{{!-- {{/if}} --}}
-		</div>
-	</div>
+  <div class="card col-8 card-event">
+    <div class="card-body event-page">
+      <h1>{{event.title}}</h1>
+      <img src="{{event.imagePath}}" alt="{{event.imageName}}" class="img-fluid">
+      <p>Date: {{event.date}}</p>
+      <p>City: {{event.city}}</p>
+      <p>Price: {{event.price}}</p>
+      {{#if isOwner}}
+      <a href="/edit-event/{{event._id}}">Edit this event</a>
+      {{/if}}
+    </div>
+  </div>
 </div>

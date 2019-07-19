@@ -434,12 +434,12 @@ router.post('/add-event', uploadCloud.single('event-pic'), ensureLogin.ensureLog
 router.get('/event/:eventID', (req, res) => {
   const { eventID } = req.params;
   let idUser = null;
-  if (req.user) {
-    idUser = req.user.id;
-  }
+  let isOwner = null;
+  if (req.user) idUser = req.user.id;
   Event.findById(eventID)
     .then((event) => {
-      res.render('event', { event, idUser });
+      if (idUser == event.authorID) isOwner = true;
+      res.render('event', { event, idUser, isOwner });
     })
     .catch((err) => {
       throw new Error(err);
