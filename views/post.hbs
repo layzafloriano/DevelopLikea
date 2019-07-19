@@ -1,4 +1,4 @@
-<div class="container d-flex">
+<div class="container d-flex post-content my-3">
   <nav class="sidebar-post col-3">
     {{> sidebar}}
   </nav>
@@ -9,7 +9,7 @@
         <p>{{{post.text}}}</p>
 
         {{#if isAuthor}}
-          <button><a href="/edit-post/{{post._id}}">Edit</a></button>
+          <button class="btn btn-primary"><a href="/edit-post/{{post._id}}">Edit</a></button>
         {{/if}}
     </div>
   </div>
