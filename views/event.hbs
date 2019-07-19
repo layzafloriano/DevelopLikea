@@ -9,11 +9,8 @@
             <p>Date: {{event.date}}</p>
             <p>City: {{event.city}}</p>
             <p>Price: {{event.price}}</p>
-			{{!-- make sure this user is the author --}}
 			{{!-- {{#if user}} --}}
 			<a href="/edit-event/{{event._id}}">Edit this event</a>
-            <br>
-            <a href="/delete-event/{{event._id}}">Delete this event</a>
 			{{!-- {{/if}} --}}
 		</div>
 	</div>
