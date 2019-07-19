@@ -4,7 +4,8 @@ const app = express();
 const flash = require('connect-flash');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-// const axios = require('axios');
+// const geocoder = new google.maps.Geocoder();
+const axios = require('axios');
 const ensureLogin = require('connect-ensure-login');
 const uploadCloud = require('../config/cloudinary.js');
 const User = require('../models/User');
@@ -433,13 +434,14 @@ router.post('/add-event', uploadCloud.single('event-pic'), ensureLogin.ensureLog
 
 router.get('/event/:eventID', (req, res) => {
   const { eventID } = req.params;
+  const API = process.env.API_KEY_GOOGLE;
   let idUser = null;
   let isOwner = null;
   if (req.user) idUser = req.user.id;
   Event.findById(eventID)
     .then((event) => {
       if (idUser == event.authorID) isOwner = true;
-      res.render('event', { event, idUser, isOwner });
+      res.render('event', { event, idUser, isOwner, API });
     })
     .catch((err) => {
       throw new Error(err);
@@ -528,6 +530,17 @@ router.get('/network', (req, res) => {
     .catch((err) => {
       throw newError(err);
     });
+});
+
+router.post('/api', (req, res) => {
+  const { eventId } = req.body;
+  Event.findById(eventId)
+    .then((place) => {
+      res.status(200).json({ place });
+    })
+    .catch((err) => {
+      throw new Error(err)
+    })
 });
 
 module.exports = router;
