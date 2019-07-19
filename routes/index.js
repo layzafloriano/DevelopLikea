@@ -85,10 +85,12 @@ router.post('/add-post', ensureLogin.ensureLoggedIn('/auth/login'), uploadCloud.
 router.get('/post/:id', (req, res) => {
   const postId = req.params.id;
   let isAuthor = false;
+  let idUser = null;
+  if (req.user) idUser = req.user.id;
   Post.findById(postId)
     .then((post) => {
       // eslint-disable-next-line eqeqeq
-      if (req.user.id && req.user.id == post.authorId) isAuthor = true;
+      if (idUser == post.authorId) isAuthor = true;
       res.render('post', { post, isAuthor });
     })
     .catch((err) => {
