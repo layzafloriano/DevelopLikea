@@ -10,7 +10,7 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const passport     = require('passport');
-// const axios        = require('axios');
+const axios        = require('axios');
 const LocalStrategy= require('passport-local').Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
 const bcrypt       = require('bcrypt');
@@ -20,6 +20,7 @@ const MongoStore   = require('connect-mongo')(session);
 const flash        = require('connect-flash');
 const index        = require('./routes/index');
 const authRoutes = require('./routes/authentication');
+// const eventRoutes = require('./routes/events')
 
 const app = express();
 
@@ -126,6 +127,8 @@ passport.use(new GitHubStrategy({
 app.use('/', index);
 
 app.use('/auth', authRoutes);
+
+// app.use('/event', eventRoutes);
 
 module.exports = app;
 
