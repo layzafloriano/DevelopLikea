@@ -271,12 +271,14 @@ router.post('/edit-opening/:openingID', (req, res) => {
 router.get('/opening/:openingID', (req, res) => {
   const { openingID } = req.params;
   let idUser = null;
+  let isOwner = false;
   if (req.user) {
     idUser = req.user.id;
   }
   Opening.findById(openingID)
     .then((opening) => {
-      res.render('opening', { opening, idUser });
+      if (idUser == opening.author) isOwner = true;
+      res.render('opening', { opening, idUser, isOwner });
     })
     .catch(err => console.log(err));
 });
