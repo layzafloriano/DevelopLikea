@@ -153,7 +153,7 @@ router.get('/delete-post/:id', ensureLogin.ensureLoggedIn('/auth/login'), (req, 
     });
 });
 
-router.get('/add-opening', (req, res) => {
+router.get('/add-opening', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   let idUser = null;
   if (req.user) {
     idUser = req.user.id;
@@ -161,7 +161,7 @@ router.get('/add-opening', (req, res) => {
   res.render('add-opening', { idUser });
 })
 
-router.post('/add-opening', (req, res) => {
+router.post('/add-opening', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   const {
     title,
     description,
@@ -214,7 +214,7 @@ router.get('/openings', (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.get('/edit-opening/:openingID', (req, res) => {
+router.get('/edit-opening/:openingID', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   const { openingID } = req.params;
   let idUser = null;
   if (req.user) {
@@ -226,9 +226,9 @@ router.get('/edit-opening/:openingID', (req, res) => {
       res.render('edit-opening', { opening, idUser });
     })
     .catch(err => console.log(err));
-})
+});
 
-router.post('/edit-opening/:openingID', (req, res) => {
+router.post('/edit-opening/:openingID', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   const { openingID } = req.params;
   const {
     title,
@@ -271,17 +271,19 @@ router.post('/edit-opening/:openingID', (req, res) => {
 router.get('/opening/:openingID', (req, res) => {
   const { openingID } = req.params;
   let idUser = null;
+  let isOwner = false;
   if (req.user) {
     idUser = req.user.id;
   }
   Opening.findById(openingID)
     .then((opening) => {
-      res.render('opening', { opening, idUser });
+      if (idUser == opening.author) isOwner = true;
+      res.render('opening', { opening, idUser, isOwner });
     })
     .catch(err => console.log(err));
 });
 
-router.get('/delete-opening/:openingID', (req, res) => {
+router.get('/delete-opening/:openingID', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   const { openingID } = req.params;
   Opening.findByIdAndDelete(openingID)
     .then(() => { res.redirect('/'); })
@@ -306,7 +308,7 @@ router.get('/profile/:userID', (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.get('/edit-profile/:userID', (req, res) => {
+router.get('/edit-profile/:userID', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   const { userID } = req.params;
   let idUser = null;
   if (req.user) {
@@ -317,7 +319,7 @@ router.get('/edit-profile/:userID', (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, res) => {
+router.post('/edit-profile/:userID', ensureLogin.ensureLoggedIn('/auth/login'), uploadCloud.single('profile-pic'), (req, res) => {
   const { userID } = req.params;
   const { username, bio, specialty, mentor, openToOpportunities, city, linkedin, twitter, github } = req.body;
   let valueMentor = false;
@@ -347,7 +349,7 @@ router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, re
     })
       .then((user) => {
         console.log(user);
-        res.render('edit-profile', { user })
+        res.render('edit-profile', { user });
       })
       .catch(err => console.log(err));
   } else {
@@ -367,7 +369,7 @@ router.post('/edit-profile/:userID', uploadCloud.single('profile-pic'), (req, re
   }
 });
 
-router.get('/delete-profile/:userID', (req, res) => {
+router.get('/delete-profile/:userID', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   const { userID } = req.params;
   User.findByIdAndDelete(userID)
     .then(() => res.redirect('/auth/signup'))
@@ -432,12 +434,12 @@ router.post('/add-event', uploadCloud.single('event-pic'), ensureLogin.ensureLog
 router.get('/event/:eventID', (req, res) => {
   const { eventID } = req.params;
   let idUser = null;
-  if (req.user) {
-    idUser = req.user.id;
-  }
+  let isOwner = null;
+  if (req.user) idUser = req.user.id;
   Event.findById(eventID)
     .then((event) => {
-      res.render('event', { event, idUser });
+      if (idUser == event.authorID) isOwner = true;
+      res.render('event', { event, idUser, isOwner });
     })
     .catch((err) => {
       throw new Error(err);
@@ -456,7 +458,7 @@ router.get('/events', (req, res) => {
     });
 });
 
-router.get('/edit-event/:eventID', (req, res) => {
+router.get('/edit-event/:eventID', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   const { eventID } = req.params;
   let idUser = null;
   if (req.user) {
@@ -470,7 +472,7 @@ router.get('/edit-event/:eventID', (req, res) => {
 })
 
 
-router.post('/edit-event/:eventID', uploadCloud.single('event-pic'), (req, res) => {
+router.post('/edit-event/:eventID', ensureLogin.ensureLoggedIn('/auth/login'), uploadCloud.single('event-pic'), (req, res) => {
   const { eventID } = req.params;
   const { title, time, city, description, price, latitude, longitude } = req.body;
   const location = {
@@ -509,7 +511,7 @@ router.post('/edit-event/:eventID', uploadCloud.single('event-pic'), (req, res) 
   }
 });
 
-router.get('/delete-event/:eventID', (req, res) => {
+router.get('/delete-event/:eventID', ensureLogin.ensureLoggedIn('/auth/login'), (req, res) => {
   const { eventID } = req.params;
   Event.findByIdAndDelete(eventID)
     .then(() => { res.redirect('/events') })

@@ -1,10 +1,10 @@
-<div class="profile-content">
+<div class="profile-content container">
 	<div class="profile-box">
 		<div class="profile-top">
 			<div class="nameandedit">
 				<h1>{{user.name}}</h1>
 				{{#if isOwner}}
-				<a href="/edit-profile/{{user._id}}">Edit profile</a>
+				<a class="mr-3" href="/edit-profile/{{user._id}}">Edit profile</a>
 				{{/if}}
 			</div>
 			{{#if user.username}}
