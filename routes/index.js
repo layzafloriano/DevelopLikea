@@ -88,7 +88,7 @@ router.get('/post/:id', (req, res) => {
   Post.findById(postId)
     .then((post) => {
       // eslint-disable-next-line eqeqeq
-      if (req.user.id == post.authorId) isAuthor = true;
+      if (req.user.id && req.user.id == post.authorId) isAuthor = true;
       res.render('post', { post, isAuthor });
     })
     .catch((err) => {
