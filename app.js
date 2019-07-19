@@ -24,6 +24,8 @@ const authRoutes = require('./routes/authentication');
 
 const app = express();
 
+app.use(favicon(path.join(__dirname, 'public', 'develop.ico')));
+
 // config Mongoose
 mongoose
   .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
