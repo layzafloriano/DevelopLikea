@@ -1,25 +1,21 @@
-<div class="container d-flex">
+<div class="container d-flex my-3">
   <nav class="sidebar-event col-3">
     {{> sidebar}}
   </nav>
-	<div class="card col-8 card-event">
-		<div class="card-body event-page">
-            <h1>{{event.title}}</h1>
-            <img src="{{event.imagePath}}" alt="{{event.imageName}}">
-            <h3>{{event.date}}</h3>
-            <p>{{event.city}}</p>
-            <p>{{event.price}}</p>
-            <p>Created at: {{event.createdAt}}</p>
-			{{!-- make sure this user is the author --}}
-			{{!-- {{#if user}} --}}
-		<button class="btn btn-primary" type="submit">Edit event</button>
-		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete event</button>
-			{{!-- {{/if}} --}}
-		</div>
+  <div class="card col-8 card-event">
+    <div class="card-body event-page">
+        <h1>{{event.title}}</h1>
+        <img src="{{event.imagePath}}" alt="{{event.imageName}}" class="img-fluid">
+        <p>Date: {{event.date}}</p>
+        <p>City: {{event.city}}</p>
+        <p>Price: {{event.price}}</p>
+        {{#if isOwner}}
+        <a href="/edit-event/{{event._id}}">Edit this event</a>
+        {{/if}}
+      </div>
       <div id="map">
-
+    </div>
   </div>
-	</div>
 </div>
 
 	{{!-- *****Modal***** --}}
@@ -44,3 +40,4 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{API}}"></script>
 <script type="text/javascript" src="/javascripts/main.js"></script>
+

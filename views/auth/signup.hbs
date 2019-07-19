@@ -1,60 +1,61 @@
-<!-- views/auth/signup.hbs -->
-<div class="card card-login">
-  <div class="card-body">
-    <h2>Sign up</h2>
+<div class="container">
+  <div class="card card-login">
+    <div class="card-body">
+      <h2>Sign up</h2>
 
-    <form action="/auth/signup" method="POST" id="form-container">
-      <div class="form-group">
-        <label for="name">First name </label>
-        <input id="name" type="text" name="name" placeholder="First name" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="lastName">Last name</label>
-        <input id="lastName" type="text" name="lastName" placeholder="Last name" class="form-control">
-
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="Email" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input id="username" type="text" name="username" placeholder="Username" class="form-control">
-      </div>
-
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input id="password" type="password" name="password" placeholder="Your password" class="form-control">
-      </div>
-
-      <div class="signup-check">
-        <div class="form-group form-check mr-4">
-          <input type="checkbox" name="mentor" id="mentor" class="form-check-input">
-          <label for="mentor">Mentor</label>
+      <form action="/auth/signup" method="POST" id="form-container">
+        <div class="form-group">
+          <label for="name">First name </label>
+          <input id="name" type="text" name="name" placeholder="First name" class="form-control">
         </div>
 
-        <div class="form-group form-check">
-          <input type="checkbox" name="openToOpportunities" id="openToOpportunities" class="form-check-input">
-          <label for="openToOpportunities">Open to opportunities</label>
+        <div class="form-group">
+          <label for="lastName">Last name</label>
+          <input id="lastName" type="text" name="lastName" placeholder="Last name" class="form-control">
+
         </div>
-      </div>
 
-      <button type="submit" class="btn btn-primary">Create account</button>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="Email" class="form-control">
+        </div>
 
-      <p class="account-message mt-4">
-        Do you already have an account?
-        <a href="/auth/login">Login</a>
-      </p>
-      {{#if message}}
-      <div class="error-message">{{ message }}</div>
-      {{/if}}
-      <div>
-        <a href="/auth/github">Sign up with GitHub!</a>
-      </div>
-    </form>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input id="username" type="text" name="username" placeholder="Username" class="form-control">
+        </div>
+
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" placeholder="Your password" class="form-control">
+        </div>
+
+        <div class="signup-check">
+          <div class="form-group form-check mr-4">
+            <input type="checkbox" name="mentor" id="mentor" class="form-check-input">
+            <label for="mentor">Mentor</label>
+          </div>
+
+          <div class="form-group form-check">
+            <input type="checkbox" name="openToOpportunities" id="openToOpportunities" class="form-check-input">
+            <label for="openToOpportunities">Open to opportunities</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create account</button>
+
+        <p class="account-message mt-4">
+          Do you already have an account?
+          <a href="/auth/login">Login</a>
+        </p>
+        {{#if message}}
+        <div class="error-message">{{ message }}</div>
+        {{/if}}
+        <div>
+          <a href="/auth/github">Sign up with GitHub!</a>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
