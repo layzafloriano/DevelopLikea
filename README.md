@@ -1,6 +1,6 @@
 # Code like @
 
-_This project was developed by Layza Floriano and Stefanie Cespedes in a week for Ironhack’s second project in the web development bootcamp._
+_This project was developed by Layza Floriano and [Stefanie Cespedes](https://github.com/StefanieCespedes) in a week for Ironhack’s second project in the web development bootcamp._
 
 TLDR 
 http://developlikea.herokuapp.com
